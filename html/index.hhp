@@ -1,0 +1,43 @@
+[OPTIONS]
+Compatibility=1.1
+Full-text search=Yes
+Contents file=index.hhc
+Default Window=main
+Default topic=index.html
+Index file=index.hhk
+Language=0x409 English (United States)
+Title=StellaNet
+
+[WINDOWS]
+main="StellaNet","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x10387e,,,,,,,,0
+
+[FILES]
+namespaceperturbations.html
+classperturbations_1_1_perturbation.html
+classperturbations_1_1_perturbation-members.html
+namespacestella__net__config.html
+namespacestella__net__exceptions.html
+classstella__net__exceptions_1_1_param_too_large_error.html
+classstella__net__exceptions_1_1_param_too_small_error.html
+index.html
+namespaces.html
+annotated.html
+classes.html
+hierarchy.html
+functions.html
+functions_func.html
+tab_a.png
+tab_b.png
+tab_h.png
+tab_s.png
+nav_h.png
+nav_f.png
+bc_s.png
+doxygen.png
+closed.png
+open.png
+bdwn.png
+sync_on.png
+sync_off.png
+classstella__net__exceptions_1_1_param_too_large_error.png
+classstella__net__exceptions_1_1_param_too_small_error.png
