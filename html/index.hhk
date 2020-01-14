@@ -4,9 +4,9 @@
 <param name="FrameName" value="right">
 </OBJECT>
 <UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#ad6d10c238822e775fc80cf48193bf3b4"><param name="Name" value="__init__"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a3e4b494d1c26ceb34c63e7836489edca"><param name="Name" value="__init__"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#ad6d10c238822e775fc80cf48193bf3b4"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a3e4b494d1c26ceb34c63e7836489edca"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_large_error.html#a9635d39904c70520536eb8e4ac9f3e75"><param name="Name" value="__init__"></OBJECT>
   <UL>
@@ -17,27 +17,19 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_small_error.html#ac5c52cafd3b8c3ead02823d7f63b2d9a"><param name="Name" value="StellaNet::stella_net_exceptions::ParamTooSmallError"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error.html#a66fdab39c8de026506bc78e11916f0ec"><param name="Name" value="__init__"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1perturbations_1_1_perturbations.html#a3e519b96d4c0c0ae42124fe6b6f712ec"><param name="Name" value="apply_vsini"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_perturbations.html#a9fc3bc8fc9a70cc561e71b6bc200e688"><param name="Name" value="apply_snr"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_perturbations.html#a4146231f282e844960b7b544fee95c1c"><param name="Name" value="apply_vsini"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#ae9db5e3d4330b37aae1b9d23fdcb342e"><param name="Name" value="errors"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#aa30258ff6d75144050c64ef1e756e0ee"><param name="Name" value="fluxes"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a6b89a646f51b8a432c84c28831af6f4d"><param name="Name" value="get_noise_applied"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a35cc41eec28c96fce8bbb5001295184d"><param name="Name" value="get_radial_velocity_shift_applied"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a88828bcbb8d73009df4570e06139ad43"><param name="Name" value="get_vsini_applied"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a8e2f28550ed7ac3b3f0a01f2d7d2dde3"><param name="Name" value="noise_applied"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a2f45df40ca9d4c2608dcdd61cfb6c9d3"><param name="Name" value="noise_value"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceperturbations.html"><param name="Name" value="perturbations"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a1486cb3ce5f689daa06a3800cd985ab9"><param name="Name" value="radial_velocity_shift"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a42576fcbd1328d7188380f4c63b74a2a"><param name="Name" value="radial_velocity_shift_applied"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_file_operations.html#aff1ab60378a628f0f2dca50228bebc5c"><param name="Name" value="read_spectrum"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacespectrum.html"><param name="Name" value="spectrum"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacestella__net__config.html"><param name="Name" value="stella_net_config"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacestella__net__exceptions.html"><param name="Name" value="stella_net_exceptions"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="md__r_e_a_d_m_e.html"><param name="Name" value="StellaNet"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1perturbations_1_1_perturbations.html"><param name="Name" value="StellaNet::perturbations::Perturbations"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1perturbations_1_1_perturbations.html#a3e519b96d4c0c0ae42124fe6b6f712ec"><param name="Name" value="StellaNet::perturbations::Perturbations"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#ad6d10c238822e775fc80cf48193bf3b4"><param name="Name" value="__init__"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a3e4b494d1c26ceb34c63e7836489edca"><param name="Name" value="__init__"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
   <UL>
@@ -47,42 +39,6 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#aa30258ff6d75144050c64ef1e756e0ee"><param name="Name" value="fluxes"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a6b89a646f51b8a432c84c28831af6f4d"><param name="Name" value="get_noise_applied"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a35cc41eec28c96fce8bbb5001295184d"><param name="Name" value="get_radial_velocity_shift_applied"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a88828bcbb8d73009df4570e06139ad43"><param name="Name" value="get_vsini_applied"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a8e2f28550ed7ac3b3f0a01f2d7d2dde3"><param name="Name" value="noise_applied"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a2f45df40ca9d4c2608dcdd61cfb6c9d3"><param name="Name" value="noise_value"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a1486cb3ce5f689daa06a3800cd985ab9"><param name="Name" value="radial_velocity_shift"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a42576fcbd1328d7188380f4c63b74a2a"><param name="Name" value="radial_velocity_shift_applied"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a286d7bf5ea8e8348694d902c14c04008"><param name="Name" value="vsini_applied"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#ab8b059c6453d76d55a6de41d6a092851"><param name="Name" value="vsini_value"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#acce67ce5e461c307082df7f184633652"><param name="Name" value="StellaNet::spectrum::Spectrum"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_large_error.html"><param name="Name" value="StellaNet::stella_net_exceptions::ParamTooLargeError"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_large_error.html#a9635d39904c70520536eb8e4ac9f3e75"><param name="Name" value="StellaNet::stella_net_exceptions::ParamTooLargeError"></OBJECT>
@@ -90,8 +46,15 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_small_error.html#ac5c52cafd3b8c3ead02823d7f63b2d9a"><param name="Name" value="StellaNet::stella_net_exceptions::ParamTooSmallError"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error.html"><param name="Name" value="StellaNet::stella_net_exceptions::WavelengthSpacingError"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error.html#a66fdab39c8de026506bc78e11916f0ec"><param name="Name" value="StellaNet::stella_net_exceptions::WavelengthSpacingError"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a286d7bf5ea8e8348694d902c14c04008"><param name="Name" value="vsini_applied"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#ab8b059c6453d76d55a6de41d6a092851"><param name="Name" value="vsini_value"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_file_operations.html"><param name="Name" value="StellaNet::utilities::FileOperations"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_file_operations.html#aff1ab60378a628f0f2dca50228bebc5c"><param name="Name" value="StellaNet::utilities::FileOperations"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_perturbations.html"><param name="Name" value="StellaNet::utilities::Perturbations"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_perturbations.html"><param name="Name" value="StellaNet::utilities::Perturbations"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_perturbations.html#a9fc3bc8fc9a70cc561e71b6bc200e688"><param name="Name" value="apply_snr"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1utilities_1_1_perturbations.html#a4146231f282e844960b7b544fee95c1c"><param name="Name" value="StellaNet::utilities::Perturbations"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceutilities.html"><param name="Name" value="utilities"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#acce67ce5e461c307082df7f184633652"><param name="Name" value="wavelengths"></OBJECT>
 </UL>
 </BODY>

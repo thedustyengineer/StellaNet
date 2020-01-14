@@ -1,5 +1,5 @@
-## @package perturbations
-# File contains Perturbation class which includes methods pertaining to perturbations of spectra
+## @package utilities
+# File contains Perturbation and FileOperations classes that are used to support model augmentation and training
 
 
 #!/usr/bin/env python
@@ -14,17 +14,17 @@ from scipy.signal import fftconvolve
 # setup
 logger = logging.getLogger('stella_net')
 
+## Methods used to augment the model training data set and test sets
 class Perturbations:
 
     ## Applies vsini broadening to the provided spectrum.Spectrum object
     #
-    # @param spectrum: a StellaNet spectrum.Spectrum object. See spectrum.Spectrum documentation for more info.
+    # @param spectrum: a StellaNet spectrum.Spectrum object. 
     #
     # @param vsini_value: The vsini that should be applied in km/s as a float value
     #
-    # @return void
+    # @return the updated StellaNet spectrum.Spectrum object. 
     #
-    # @exception AssertionError 
     # @exception stella_net_exceptions.WavelengthSpacingError
     #
     # @note
@@ -74,10 +74,38 @@ class Perturbations:
         kernel_y /= kernel_y.sum()
         convolved_flux = 1 - fftconvolve(1-spectrum.flux, kernel_y, mode='same')
 
-        spectrum.flux = convolved_flux
-
+        spectrum.flux = convolved_flux # update the flux value
+        spectrum.vsini_applied = True
+        spectrum.vsini_value = vsini_value
         return spectrum
 
 
-    
+ ## Applies gaussian noise to the provided spectrum.Spectrum object
+    #
+    # @param spectrum: a StellaNet spectrum.Spectrum object. See spectrum.Spectrum documentation for more info.
+    #
+    # @param snr: The desired signal to noise ratio
+    #
+    # @return the updated StellaNet spectrum.Spectrum object. 
+    #
+    # @exception stella_net_exceptions.WavelengthSpacingError
+    @staticmethod
+    def apply_snr(spectrum, snr):
+        spectrum.flux= spectrum.flux/max(spectrum.flux) + \
+            np.random.normal(size=len(spectrum.flux),scale=1.00/float(snr))
+        spectrum.noise_applied = True
+        spectrum.noise_value = snr
+        return spectrum
+
+## Methods used for file operations (ie reading spectrum fits files, writing files, converting files, etc)
+class FileOperations:
+
+    ## reads a fits formatted spectrum
+    # @param filename: the path to the file that is to be read
+    # @return a StellaNet spectrum.Spectrum object generated from the file that was read
+    @staticmethod
+    def read_spectrum(filename):
+        print('implement me')
+        spectrum = 'the spectrum' # change later
+        return spectrum
     

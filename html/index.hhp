@@ -13,12 +13,9 @@ main="StellaNet","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,
 
 [FILES]
 md__r_e_a_d_m_e.html
-namespaceperturbations.html
 namespacespectrum.html
 namespacestella__net__config.html
 namespacestella__net__exceptions.html
-class_stella_net_1_1perturbations_1_1_perturbations.html
-class_stella_net_1_1perturbations_1_1_perturbations-members.html
 class_stella_net_1_1spectrum_1_1_spectrum.html
 class_stella_net_1_1spectrum_1_1_spectrum-members.html
 class_stella_net_1_1stella__net__exceptions_1_1_param_too_large_error.html
@@ -27,6 +24,11 @@ class_stella_net_1_1stella__net__exceptions_1_1_param_too_small_error.html
 class_stella_net_1_1stella__net__exceptions_1_1_param_too_small_error-members.html
 class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error.html
 class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error-members.html
+class_stella_net_1_1utilities_1_1_file_operations.html
+class_stella_net_1_1utilities_1_1_file_operations-members.html
+class_stella_net_1_1utilities_1_1_perturbations.html
+class_stella_net_1_1utilities_1_1_perturbations-members.html
+namespaceutilities.html
 index.html
 pages.html
 namespaces.html

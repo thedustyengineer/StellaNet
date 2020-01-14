@@ -3,11 +3,11 @@ import os
 import logging
 import stella_net_config
 import stella_net_exceptions
-import perturbations as ptb
+import utilities as utils
 from spectrum import Spectrum
 
 
 
 
-ptb.apply_vsini(spectrum,300)
+utils.Perturbations.apply_vsini(spectrum,300)
 
