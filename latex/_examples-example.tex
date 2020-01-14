@@ -1,0 +1,28 @@
+\hypertarget{_examples-example}{}\doxysection{Examples}
+Applies vsini broadening to the provided spectrum.\+Spectrum object
+\begin{DoxyParams}{Parameters}
+{\em spectrum} & a Stella\+Net spectrum.\+Spectrum object. See spectrum.\+Spectrum documentation for more info.\\
+\hline
+{\em vsini\+\_\+value} & float value. The vsini that should be applied in km/s.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion\+Error,stella\+\_\+net\+\_\+exceptions.\+Wavelength\+Spacing\+Error} & \+:\\
+\hline
+\end{DoxyExceptions}
+self.\+apply\+\_\+vsini(spectrum, 100)
+
+References\+:
+
+Adapted from i\+Spec by Sergi-\/\+Blanco Cuaresma \href{https://www.blancocuaresma.com/s/iSpec}{\texttt{ https\+://www.\+blancocuaresma.\+com/s/i\+Spec}} which was adapted from lsf\+\_\+rotate.\+pro\+: \href{http://idlastro.gsfc.nasa.gov/ftp/pro/astro/lsf_rotate.pro}{\texttt{ http\+://idlastro.\+gsfc.\+nasa.\+gov/ftp/pro/astro/lsf\+\_\+rotate.\+pro}}
+
+which was adapted from rotin3.\+f in the S\+Y\+N\+S\+P\+EC software of Hubeny \& Lanz \href{http://nova.astro.umd.edu/index.html}{\texttt{ http\+://nova.\+astro.\+umd.\+edu/index.\+html}} Also see Eq. 17.\+12 in \char`\"{}\+The Observation and Analysis of Stellar Photospheres\char`\"{} by D. Gray (1992)
+
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ 

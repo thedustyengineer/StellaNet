@@ -1,0 +1,77 @@
+\hypertarget{_2_users_2dustin_2_projects_2_stella_net_2perturbations_8py-example}{}\doxysection{/\+Users/dustin/\+Projects/\+Stella\+Net/perturbations.\+py}
+Applies vsini broadening to the provided spectrum.\+Spectrum object
+\begin{DoxyParams}{Parameters}
+{\em spectrum} & a Stella\+Net spectrum.\+Spectrum object. See spectrum.\+Spectrum documentation for more info.\\
+\hline
+{\em vsini\+\_\+value} & float value. The vsini that should be applied in km/s.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion\+Error} & stella\+\_\+net\+\_\+exceptions.\+Wavelength\+Spacing\+Error\\
+\hline
+\end{DoxyExceptions}
+self.\+apply\+\_\+vsini(spectrum, 100)
+
+References\+:
+
+Adapted from i\+Spec by Sergi-\/\+Blanco Cuaresma \href{https://www.blancocuaresma.com/s/iSpec}{\texttt{ https\+://www.\+blancocuaresma.\+com/s/i\+Spec}} which was adapted from lsf\+\_\+rotate.\+pro\+: \href{http://idlastro.gsfc.nasa.gov/ftp/pro/astro/lsf_rotate.pro}{\texttt{ http\+://idlastro.\+gsfc.\+nasa.\+gov/ftp/pro/astro/lsf\+\_\+rotate.\+pro}}
+
+which was adapted from rotin3.\+f in the S\+Y\+N\+S\+P\+EC software of Hubeny \& Lanz \href{http://nova.astro.umd.edu/index.html}{\texttt{ http\+://nova.\+astro.\+umd.\+edu/index.\+html}} Also see Eq. 17.\+12 in \char`\"{}\+The Observation and Analysis of Stellar Photospheres\char`\"{} by D. Gray (1992)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{comment}{\#!/usr/bin/env python}}
+\DoxyCodeLine{6 \textcolor{keyword}{import} distutils}
+\DoxyCodeLine{7 \textcolor{keyword}{import} os}
+\DoxyCodeLine{8 \textcolor{keyword}{import} logging}
+\DoxyCodeLine{9 \textcolor{keyword}{import} stella\_net\_config}
+\DoxyCodeLine{10 \textcolor{keyword}{import} stella\_net\_exceptions}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{comment}{\# setup}}
+\DoxyCodeLine{13 logger = logging.getLogger(\textcolor{stringliteral}{'stella\_net'})}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }Perturbations:}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     }
+\DoxyCodeLine{41     @staticmethod}
+\DoxyCodeLine{42     \textcolor{keyword}{def }apply\_vsini(spectrum, vsini\_value):}
+\DoxyCodeLine{43         }
+\DoxyCodeLine{44     }
+\DoxyCodeLine{45         logger.info(\textcolor{stringliteral}{'applying vsini perturbation with value \{\}'}.format(vsini\_value))}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47         \textcolor{comment}{\# check homogeneity of wavelength values}}
+\DoxyCodeLine{48         \textcolor{keywordflow}{for} wave\_index \textcolor{keywordflow}{in} range (1, len(spectrum.wavelengths)):}
+\DoxyCodeLine{49             \textcolor{keywordflow}{if} (wave\_index != len(spectrum.wavelengths)):}
+\DoxyCodeLine{50                 current\_wavelength = spectrum.wavelengths[wave\_index]}
+\DoxyCodeLine{51                 previous\_wavelength = spectrum.wavelengths[wave\_index -\/ 1]}
+\DoxyCodeLine{52                 next\_wavelength = spectrum.wavelengths[wave\_index + 1]}
+\DoxyCodeLine{53                 \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} ((next\_wavelength -\/ current\_wavelength) == (current\_wavelength -\/ previous\_wavelength)):}
+\DoxyCodeLine{54                     \textcolor{keywordflow}{raise} stella\_net\_exceptions.WavelengthSpacingError}
+\DoxyCodeLine{55         }
+\DoxyCodeLine{56         e1 = 2.0*(1.0 -\/ epsilon)}
+\DoxyCodeLine{57         e2 = np.pi*epsilon/2.0}
+\DoxyCodeLine{58         e3 = np.pi*(1.0 -\/ epsilon/3.0)}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         npts = np.ceil(2*vsini/deltav)}
+\DoxyCodeLine{61         \textcolor{keywordflow}{if} npts \% 2 == 0:}
+\DoxyCodeLine{62             npts += 1}
+\DoxyCodeLine{63         nwid = np.floor(npts/2)}
+\DoxyCodeLine{64         x = np.arange(npts) -\/ nwid}
+\DoxyCodeLine{65         x = x*deltav/vsini}
+\DoxyCodeLine{66         x1 = np.abs(1.0 -\/ x**2)}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         velgrid = x*vsini}
+\DoxyCodeLine{69         \textcolor{keywordflow}{return} velgrid, (e1*np.sqrt(x1) + e2*x1)/e3}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     }
+\DoxyCodeLine{73     }
+\end{DoxyCodeInclude}
+ 

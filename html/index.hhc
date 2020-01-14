@@ -4,11 +4,13 @@
 <param name="FrameName" value="right">
 </OBJECT>
 <UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="StellaNet"><param name="Local" value="md__r_e_a_d_m_e.html"><param name="ImageNumber" value="11"></OBJECT>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Packages"><param name="Local" value="namespaces.html"><param name="ImageNumber" value="1"></OBJECT>
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Packages"><param name="Local" value="namespaces.html"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="perturbations"><param name="Local" value="namespaceperturbations.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="spectrum"><param name="Local" value="namespacespectrum.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="stella_net_config"><param name="Local" value="namespacestella__net__config.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="stella_net_exceptions"><param name="Local" value="namespacestella__net__exceptions.html"><param name="ImageNumber" value="11"></OBJECT>
     </UL>
@@ -17,19 +19,42 @@
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Class List"><param name="Local" value="annotated.html"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="perturbations"><param name="Local" value="namespaceperturbations.html"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="StellaNet"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Perturbation"><param name="Local" value="classperturbations_1_1_perturbation.html"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="perturbations"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="__init__"><param name="Local" value="classperturbations_1_1_perturbation.html#a65a184699c3b5d4f63d0b520d42bbe55"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="apply_vsini"><param name="Local" value="classperturbations_1_1_perturbation.html#a15e1abc6a57cb761c3f3960a2def1e04"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="name"><param name="Local" value="classperturbations_1_1_perturbation.html#af4de7f177b37427147726cc9c929c4c0"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Perturbations"><param name="Local" value="class_stella_net_1_1perturbations_1_1_perturbations.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          </UL>
         </UL>
-      </UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="stella_net_exceptions"><param name="Local" value="namespacestella__net__exceptions.html"><param name="ImageNumber" value="1"></OBJECT>
-      <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ParamTooLargeError"><param name="Local" value="classstella__net__exceptions_1_1_param_too_large_error.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ParamTooSmallError"><param name="Local" value="classstella__net__exceptions_1_1_param_too_small_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="spectrum"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Spectrum"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="__init__"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#ad6d10c238822e775fc80cf48193bf3b4"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="get_noise_applied"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a6b89a646f51b8a432c84c28831af6f4d"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="get_radial_velocity_shift_applied"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a35cc41eec28c96fce8bbb5001295184d"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="get_vsini_applied"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#a88828bcbb8d73009df4570e06139ad43"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="errors"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#ae9db5e3d4330b37aae1b9d23fdcb342e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="fluxes"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#aa30258ff6d75144050c64ef1e756e0ee"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="wavelengths"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html#acce67ce5e461c307082df7f184633652"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="stella_net_exceptions"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ParamTooLargeError"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_large_error.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="__init__"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_large_error.html#a9635d39904c70520536eb8e4ac9f3e75"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ParamTooSmallError"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_small_error.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="__init__"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_small_error.html#ac5c52cafd3b8c3ead02823d7f63b2d9a"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="WavelengthSpacingError"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="__init__"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error.html#a66fdab39c8de026506bc78e11916f0ec"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
       </UL>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Index"><param name="Local" value="classes.html"><param name="ImageNumber" value="11"></OBJECT>
@@ -37,10 +62,12 @@
     <UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Exception"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="stella_net_exceptions.ParamTooLargeError"><param name="Local" value="classstella__net__exceptions_1_1_param_too_large_error.html"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="stella_net_exceptions.ParamTooSmallError"><param name="Local" value="classstella__net__exceptions_1_1_param_too_small_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="StellaNet.stella_net_exceptions.ParamTooLargeError"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_large_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="StellaNet.stella_net_exceptions.ParamTooSmallError"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_param_too_small_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="StellaNet.stella_net_exceptions.WavelengthSpacingError"><param name="Local" value="class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="perturbations.Perturbation"><param name="Local" value="classperturbations_1_1_perturbation.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="StellaNet.perturbations.Perturbations"><param name="Local" value="class_stella_net_1_1perturbations_1_1_perturbations.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="StellaNet.spectrum.Spectrum"><param name="Local" value="class_stella_net_1_1spectrum_1_1_spectrum.html"><param name="ImageNumber" value="11"></OBJECT>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Members"><param name="Local" value="functions.html"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
