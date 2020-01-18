@@ -93,11 +93,18 @@ class Perturbations:
 
     ## Applies a radial velocity (red/blueshift) to the provided spectrum.Spectrum object
     # @param spectrum: a StellaNet spectrum.Spectrum object. See spectrum.Spectrum documentation for more info.
-    # @param velocity: the desired radial velocity shift
+    # @param velocity: the radial velocity in km/s
     # @return the updated StellaNet spectrum.Spectrum object. 
+    # @note
+    # Relativistic radial velocity correction is based on:
+    # http://spiff.rit.edu/classes/phys314/lectures/doppler/doppler.html
     @staticmethod
     def apply_rad_vel_shift(spectrum, velocity):
-        print()
+        c = 299792458.0 # Speed of light (m/s)
+        # relativistic wavelength correction
+        velocity = (velocity*1000.) # convert velocity from km/s to m/s
+        spectrum.wavelengths = spectrum.wavelengths * np.sqrt((1.-velocity/c)/(1.+velocity/c))
+        return spectrum
 
 ## Methods used for file operations (ie reading spectrum fits files, writing files, converting files, etc)
 class FileOperations:
