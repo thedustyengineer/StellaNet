@@ -5,16 +5,6 @@
 </OBJECT>
 <UL>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="StellaNet"><param name="Local" value="md__r_e_a_d_m_e.html"><param name="ImageNumber" value="11"></OBJECT>
-<LI><OBJECT type="text/sitemap"><param name="Name" value="Packages"><param name="Local" value="namespaces.html"><param name="ImageNumber" value="1"></OBJECT>
-  <UL>
-  <LI><OBJECT type="text/sitemap"><param name="Name" value="Packages"><param name="Local" value="namespaces.html"><param name="ImageNumber" value="1"></OBJECT>
-    <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="spectrum"><param name="Local" value="namespacespectrum.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="stella_net_config"><param name="Local" value="namespacestella__net__config.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="stella_net_exceptions"><param name="Local" value="namespacestella__net__exceptions.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="utilities"><param name="Local" value="namespaceutilities.html"><param name="ImageNumber" value="11"></OBJECT>
-    </UL>
-  </UL>
 <LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="Local" value="annotated.html"><param name="ImageNumber" value="1"></OBJECT>
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Class List"><param name="Local" value="annotated.html"><param name="ImageNumber" value="1"></OBJECT>

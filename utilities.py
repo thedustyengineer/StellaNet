@@ -9,7 +9,13 @@ import logging
 import stella_net_config
 import stella_net_exceptions
 import numpy as np
+import spectrum
 from scipy.signal import fftconvolve
+from astropy.io import fits # DOCUMENTATION HERE: http://docs.astropy.org/en/stable/io/fits/
+import glob
+import csv
+from operator import itemgetter
+
 
 # setup
 logger = logging.getLogger('stella_net')
@@ -18,22 +24,15 @@ logger = logging.getLogger('stella_net')
 class Perturbations:
 
     ## Applies vsini broadening to the provided spectrum.Spectrum object
-    #
     # @param spectrum: a StellaNet spectrum.Spectrum object. 
-    #
     # @param vsini_value: The vsini that should be applied in km/s as a float value
-    #
     # @return the updated StellaNet spectrum.Spectrum object. 
-    #
     # @exception stella_net_exceptions.WavelengthSpacingError
-    #
     # @note
-    #
     #   Adapted from iSpec by Sergi-Blanco Cuaresma https://www.blancocuaresma.com/s/iSpec
     #   which was adapted
     #   from lsf_rotate.pro:
     #   http://idlastro.gsfc.nasa.gov/ftp/pro/astro/lsf_rotate.pro
-    #
     #   which was adapted from rotin3.f in the SYNSPEC software of Hubeny & Lanz
     #   http://nova.astro.umd.edu/index.html    Also see Eq. 17.12 in
     #   "The Observation and Analysis of Stellar Photospheres" by D. Gray (1992)
@@ -80,15 +79,10 @@ class Perturbations:
         return spectrum
 
 
- ## Applies gaussian noise to the provided spectrum.Spectrum object
-    #
+    ## Applies gaussian noise to the provided spectrum.Spectrum object
     # @param spectrum: a StellaNet spectrum.Spectrum object. See spectrum.Spectrum documentation for more info.
-    #
     # @param snr: The desired signal to noise ratio
-    #
     # @return the updated StellaNet spectrum.Spectrum object. 
-    #
-    # @exception stella_net_exceptions.WavelengthSpacingError
     @staticmethod
     def apply_snr(spectrum, snr):
         spectrum.flux= spectrum.flux/max(spectrum.flux) + \
@@ -97,15 +91,64 @@ class Perturbations:
         spectrum.noise_value = snr
         return spectrum
 
+    ## Applies a radial velocity (red/blueshift) to the provided spectrum.Spectrum object
+    # @param spectrum: a StellaNet spectrum.Spectrum object. See spectrum.Spectrum documentation for more info.
+    # @param velocity: the desired radial velocity shift
+    # @return the updated StellaNet spectrum.Spectrum object. 
+    @staticmethod
+    def apply_rad_vel_shift(spectrum, velocity):
+        print()
+
 ## Methods used for file operations (ie reading spectrum fits files, writing files, converting files, etc)
 class FileOperations:
 
-    ## reads a fits formatted spectrum
-    # @param filename: the path to the file that is to be read
+    ## Reads a fits formatted spectrum file and outputs a spectrum.Spectrum object
+    # @param file_path: the path to the file that is to be read
+    # @param table_num: the table number of the .fits file containing the wavelength, flux, and error values
+    # @param wave_header: the string header of the wavelength values (if wavelength obtained via CDELT1, CRVAL1, and NAXIS1 use '0')
+    # @param flux_header: the string header of the flux values (use '0' if flux vals are all that is in data)
+    # @param error_header: the string header of the error values (may be '0' to use zeroes)
     # @return a StellaNet spectrum.Spectrum object generated from the file that was read
     @staticmethod
-    def read_spectrum(filename):
-        print('implement me')
-        spectrum = 'the spectrum' # change later
-        return spectrum
+    def read_spectrum(file_path, table_num, wave_header, flux_header, error_header):
+        logger.info('Reading file at' + file_path)
+        hdul = fits.open(file_path)          # open the current fits file
     
+        if (flux_header != '0'):
+            flux = np.array(hdul[table_num].data[flux_header])   # the flux
+        else:
+            flux = np.array(hdul[table_num].data)
+
+        if (error_header != '0'):
+            error = np.array(hdul[table_num].data[error_header])
+        else:
+            error = np.zeros_like(flux)
+
+        if (wave_header != '0'):
+            wave = np.array(hdul[table_num].data[wave_header])
+        else:
+            pix_size = hdul[table_num].header['CRPIX1']
+            w_delta = hdul[table_num].header['CDELT1']
+            start_value = hdul[table_num].header['CRVAL1']
+            w_count = hdul[table_num].header['NAXIS1']
+
+            wave = ((np.arange(w_count) + 1.0) - pix_size) * w_delta + start_value
+
+        new_spectrum = spectrum.Spectrum(wave, flux, error)
+
+        return new_spectrum
+
+    @staticmethod
+    def build_dataset_from_ispec_grid_folder(directory, label_index):
+        x_train = []
+        y_train = []
+        for file in os.listdir(directory):
+            this_spectrum = FileOperations.read_spectrum(directory + '/' + file,0,'0','0','0')
+            x_train.append(this_spectrum.fluxes)
+            filename = file.split('_')
+            y_train.append(int(filename[label_index]))
+        return x_train, y_train
+
+#FileOperations.read_spectrum('/Users/dustin/iSpec/nn_grid_spectrum/grid/3500_2.50_-1.00_0.00_2.00_0.00_0.00_0.00.fits.gz', \
+   # 0, '0', '0', '0')
+       

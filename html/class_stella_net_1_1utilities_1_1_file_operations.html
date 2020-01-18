@@ -56,15 +56,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aff1ab60378a628f0f2dca50228bebc5c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stella_net_1_1utilities_1_1_file_operations.html#aff1ab60378a628f0f2dca50228bebc5c">read_spectrum</a> (filename)</td></tr>
-<tr class="memdesc:aff1ab60378a628f0f2dca50228bebc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a fits formatted spectrum  <a href="class_stella_net_1_1utilities_1_1_file_operations.html#aff1ab60378a628f0f2dca50228bebc5c">More...</a><br /></td></tr>
-<tr class="separator:aff1ab60378a628f0f2dca50228bebc5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c3c22445dd2ae1aa8a2f7c11c595a1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stella_net_1_1utilities_1_1_file_operations.html#a72c3c22445dd2ae1aa8a2f7c11c595a1">read_spectrum</a> (file_path, table_num, wave_header, flux_header, error_header)</td></tr>
+<tr class="memdesc:a72c3c22445dd2ae1aa8a2f7c11c595a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a fits formatted spectrum file and outputs a <a class="el" href="class_stella_net_1_1spectrum_1_1_spectrum.html" title="StellaNet Spectrum object definition.">spectrum.Spectrum</a> object.  <a href="class_stella_net_1_1utilities_1_1_file_operations.html#a72c3c22445dd2ae1aa8a2f7c11c595a1">More...</a><br /></td></tr>
+<tr class="separator:a72c3c22445dd2ae1aa8a2f7c11c595a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Methods used for file operations (ie reading spectrum fits files, writing files, converting files, etc) </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aff1ab60378a628f0f2dca50228bebc5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff1ab60378a628f0f2dca50228bebc5c">&#9670;&nbsp;</a></span>read_spectrum()</h2>
+<a id="a72c3c22445dd2ae1aa8a2f7c11c595a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72c3c22445dd2ae1aa8a2f7c11c595a1">&#9670;&nbsp;</a></span>read_spectrum()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -76,8 +76,36 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">def StellaNet.utilities.FileOperations.read_spectrum </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td class="paramname"><em>file_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>table_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>wave_header</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>flux_header</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>error_header</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -87,14 +115,18 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>reads a fits formatted spectrum </p>
+<p>Reads a fits formatted spectrum file and outputs a <a class="el" href="class_stella_net_1_1spectrum_1_1_spectrum.html" title="StellaNet Spectrum object definition.">spectrum.Spectrum</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>the path to the file that is to be read </td></tr>
+    <tr><td class="paramname">file_path</td><td>the path to the file that is to be read </td></tr>
+    <tr><td class="paramname">table_num</td><td>the table number of the .fits file containing the wavelength, flux, and error values </td></tr>
+    <tr><td class="paramname">wave_header</td><td>the string header of the wavelength values (if wavelength obtained via CDELT1, CRVAL1, and NAXIS1 use '0') </td></tr>
+    <tr><td class="paramname">flux_header</td><td>the string header of the flux values (use '0' if flux vals are all that is in data) </td></tr>
+    <tr><td class="paramname">error_header</td><td>the string header of the error values (may be '0' to use zeroes) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>spectrum: a StellaNet <a class="el" href="class_stella_net_1_1spectrum_1_1_spectrum.html" title="StellaNet Spectrum object definition.">spectrum.Spectrum</a> object </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a StellaNet <a class="el" href="class_stella_net_1_1spectrum_1_1_spectrum.html" title="StellaNet Spectrum object definition.">spectrum.Spectrum</a> object generated from the file that was read </dd></dl>
 
 </div>
 </div>

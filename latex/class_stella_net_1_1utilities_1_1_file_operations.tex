@@ -8,31 +8,39 @@ Methods used for file operations (ie reading spectrum fits files, writing files,
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_aff1ab60378a628f0f2dca50228bebc5c}{read\+\_\+spectrum}} (filename)
-\begin{DoxyCompactList}\small\item\em reads a fits formatted spectrum \end{DoxyCompactList}\end{DoxyCompactItemize}
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_a72c3c22445dd2ae1aa8a2f7c11c595a1}{read\+\_\+spectrum}} (file\+\_\+path, table\+\_\+num, wave\+\_\+header, flux\+\_\+header, error\+\_\+header)
+\begin{DoxyCompactList}\small\item\em Reads a fits formatted spectrum file and outputs a \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Methods used for file operations (ie reading spectrum fits files, writing files, converting files, etc) 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_aff1ab60378a628f0f2dca50228bebc5c}\label{class_stella_net_1_1utilities_1_1_file_operations_aff1ab60378a628f0f2dca50228bebc5c}} 
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_a72c3c22445dd2ae1aa8a2f7c11c595a1}\label{class_stella_net_1_1utilities_1_1_file_operations_a72c3c22445dd2ae1aa8a2f7c11c595a1}} 
 \index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!read\_spectrum@{read\_spectrum}}
 \index{read\_spectrum@{read\_spectrum}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
 \doxysubsubsection{\texorpdfstring{read\_spectrum()}{read\_spectrum()}}
-{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+read\+\_\+spectrum (\begin{DoxyParamCaption}\item[{}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+read\+\_\+spectrum (\begin{DoxyParamCaption}\item[{}]{file\+\_\+path,  }\item[{}]{table\+\_\+num,  }\item[{}]{wave\+\_\+header,  }\item[{}]{flux\+\_\+header,  }\item[{}]{error\+\_\+header }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-reads a fits formatted spectrum 
+Reads a fits formatted spectrum file and outputs a \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em filename} & the path to the file that is to be read \\
+{\em file\+\_\+path} & the path to the file that is to be read \\
+\hline
+{\em table\+\_\+num} & the table number of the .fits file containing the wavelength, flux, and error values \\
+\hline
+{\em wave\+\_\+header} & the string header of the wavelength values (if wavelength obtained via C\+D\+E\+L\+T1, C\+R\+V\+A\+L1, and N\+A\+X\+I\+S1 use \textquotesingle{}0\textquotesingle{}) \\
+\hline
+{\em flux\+\_\+header} & the string header of the flux values (use \textquotesingle{}0\textquotesingle{} if flux vals are all that is in data) \\
+\hline
+{\em error\+\_\+header} & the string header of the error values (may be \textquotesingle{}0\textquotesingle{} to use zeroes) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-spectrum\+: a Stella\+Net \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object 
+a Stella\+Net \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object generated from the file that was read 
 \end{DoxyReturn}
 
 
