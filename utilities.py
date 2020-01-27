@@ -15,6 +15,9 @@ from astropy.io import fits # DOCUMENTATION HERE: http://docs.astropy.org/en/sta
 import glob
 import csv
 from operator import itemgetter
+import matplotlib.pyplot as plt
+import random
+import copy
 
 
 # setup
@@ -117,8 +120,14 @@ class FileOperations:
     # @param error_header: the string header of the error values (may be '0' to use zeroes)
     # @return a StellaNet spectrum.Spectrum object generated from the file that was read
     @staticmethod
-    def read_spectrum(file_path, table_num, wave_header, flux_header, error_header):
+    def read_fits_spectrum(file_path, table_num, wave_header, flux_header, error_header, parse_params = False):
         logger.info('Reading file at' + file_path)
+
+        # the iSpec naming convention label indices
+        teff_label_index = 0
+        logg_label_index = 1
+        mh_label_index = 2
+
         hdul = fits.open(file_path)          # open the current fits file
     
         if (flux_header != '0'):
@@ -141,21 +150,151 @@ class FileOperations:
 
             wave = ((np.arange(w_count) + 1.0) - pix_size) * w_delta + start_value
 
-        new_spectrum = spectrum.Spectrum(wave, flux, error)
+        if parse_params:
+            filename = os.path.basename(file_path).split('_')
+            new_spectrum = spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
+                mh = filename[mh_label_index])
+        else:
+            new_spectrum = spectrum.Spectrum(wave, flux, error)
 
         return new_spectrum
 
+
+    ## Reads a tsv formatted spectrum file and outputs a spectrum.Spectrum object
+    # @param file_path: the path to the file that is to be read
+    # @param has_errors: should be true if the file has an errors column (default false)
+    # @param parse_params: true if the application should parse parameters from the filename
+    # @return a StellaNet spectrum.Spectrum object generated from the file that was read
     @staticmethod
-    def build_dataset_from_ispec_grid_folder(directory, label_index):
+    def read_tsv_spectrum(file_path, has_errors=False, parse_params = False):
+        logger.info('Reading file at' + file_path)
+
+        # the StellaNet naming convention label indices
+        teff_label_index = 0
+        logg_label_index = 1
+        mh_label_index = 2
+        vsini_label_index = 3
+        snr_label_index = 4
+        rad_vel_label_index = 5
+
+        spectrum_file = np.loadtxt(file_path)
+        wave = spectrum_file[:,0]
+        flux = spectrum_file[:,1]
+        if has_errors:
+            error = spectrum_file[:,2]
+        else:
+            error=None
+        
+        if parse_params:
+            filename = os.path.basename(file_path).split('_')
+            new_spectrum = spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
+                mh = filename[mh_label_index], vsini_value = filename[vsini_label_index], noise_value = filename[snr_label_index], \
+                radial_velocity_shift = filename[rad_vel_label_index])
+        else:
+            new_spectrum = spectrum.Spectrum(wave, flux, error)
+
+        return new_spectrum
+
+
+    ## Reads a fits formatted spectrum file and outputs a spectrum.Spectrum object
+    # @param file_path: the path to the file that is to be read
+    # @param table_num: the table number of the .fits file containing the wavelength, flux, and error values
+    # @param wave_header: the string header of the wavelength values (if wavelength obtained via CDELT1, CRVAL1, and NAXIS1 use '0')
+    # @param flux_header: the string header of the flux values (use '0' if flux vals are all that is in data)
+    # @param error_header: the string header of the error values (may be '0' to use zeroes)
+    # @return a StellaNet spectrum.Spectrum object generated from the file that was read
+    @staticmethod
+    def write_column_spectrum(spectrum, file_path):
+        with open(file_path,"a") as csvfile:
+                rows = zip(spectrum.wavelengths, spectrum.fluxes)
+                for row in rows:
+                    csvfile.write("{0}\t{1}\n".format(*row))
+
+
+    ## Reads a directory containing fits formatted spectra and builds a Keras training dataset
+    # @param directory: the path containing the fits format spectra files
+    # @param label_index: the index in the filename that indicates the label
+    # (iSpec format filenames, i.e. 3500_2.50_-1.00_0.00_2.00_0.00_0.00_0.00.fits.gz)
+    # which is teff_logg_MH_macturb_vturb...
+    # @return x_train, y_train tuple (both numpy arrays) where x_train is the flux values 
+    # and y_train is the data labels
+    @staticmethod
+    def build_dataset_from_grid_folder(directory, label_index):
         x_train = []
         y_train = []
         for file in os.listdir(directory):
-            this_spectrum = FileOperations.read_spectrum(directory + '/' + file,0,'0','0','0')
-            x_train.append(this_spectrum.fluxes)
-            filename = file.split('_')
-            y_train.append(int(filename[label_index]))
+            if '.fits' in file:
+                logger.info('Adding file: ' + file)
+                this_spectrum = FileOperations.read_fits_spectrum(directory + '/' + file,0,'0','0','0')
+                x_train.append(this_spectrum.fluxes)
+                filename = file.split('_')
+                y_train.append(int(filename[label_index]))
+            if '.tsv' in file:
+                logger.info('Adding file: ' + file)
+                this_spectrum = FileOperations.read_tsv_spectrum(directory + '/' + file, parse_params=True)
+                x_train.append(this_spectrum.fluxes)
+                y_train.append(np.array(int(this_spectrum.teff)))
         return x_train, y_train
 
-#FileOperations.read_spectrum('/Users/dustin/iSpec/nn_grid_spectrum/grid/3500_2.50_-1.00_0.00_2.00_0.00_0.00_0.00.fits.gz', \
-   # 0, '0', '0', '0')
-       
+
+    @staticmethod
+    def ApplyPerturbations(input_directory, output_directory, vsini=True, snr=True, rad_vel=True):
+        # ranges for random value generation
+        vsini_value_range = range(0,300)
+        snr_value_range = range(100,500)
+        rad_vel_value_range = range(-20,20)
+
+        # counts for random value generation
+        num_rand_vsini = 3
+        num_rand_snr = 3
+        #num_rand_rad_vel = 1
+
+        # random value generation
+        vsini_values = [5,50,100,200] #random.sample(vsini_value_range, num_rand_vsini)
+        snr_values = [300,150] #random.sample(snr_value_range, num_rand_snr)
+        #rad_vel_values = random.sample(rad_vel_value_range, num_rand_rad_vel)
+
+
+        for file in os.listdir(input_directory):
+
+            isGridFile = False
+
+            if '.fits' in file:
+                logger.info('Adding file: ' + file)
+                raw_spectrum = FileOperations.read_fits_spectrum(input_directory + '/' + file,0,'0','0','0', parse_params=True)
+                isGridFile = True
+
+            if '.tsv' in file:
+                logger.info('Adding file: ' + file)
+                raw_spectrum = FileOperations.read_tsv_spectrum(input_directory + '/' + file, parse_params=True)
+                isGridFile = True
+
+            if isGridFile:
+                for vsini_value in vsini_values:
+                    #for rad_vel_value in rad_vel_values:
+                        for snr_value in snr_values:
+                            this_spectrum = copy.deepcopy(raw_spectrum) # deep copy so that we don't apply overlapping operations
+                            this_spectrum.apply_vsini(vsini_value)
+                            #this_spectrum.apply_rad_vel_shift(rad_vel_value)
+                            this_spectrum.apply_snr(snr_value)
+                            this_spectrum.write_column_spectrum(output_directory, use_opt_params=True)
+
+                            
+
+
+#FileOperations.ApplyPerturbations('/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/grid', '/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_grid')
+#format(int(teff), logg, MH, alpha, vmic, vmac, vsini, limb_darkening_coeff) + ".fits.gz"
+
+#cspectrum = FileOperations.read_fits_spectrum('/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/grid/7000_4.00_0.00_0.00_2.00_0.00_0.00_0.00.fits.gz',0,'0','0','0', parse_params=True)
+
+
+#cspectrum.apply_vsini(100)
+#cspectrum.apply_snr(200)
+#cspectrum.apply_rad_vel_shift(-10)
+
+#cspectrum.write_column_spectrum('/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_grid', use_opt_params=True)
+#cspectrum.apply_rad_vel_shift(-10)
+#cspectrum.apply_snr(300)
+#cspectrum.PlotSpectrum()
+
+#FileOperations.ApplyPerturbations('/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/grid','/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_grid')

@@ -29,4 +29,25 @@ class WavelengthSpacingError(Exception):
         logger.exception('wavelength spacing is not homogenous')
     pass
 
+class NoiseAlreadyAppliedError(Exception):
+    ## Description: 
+    #   noise has already been applied to the spectrum
+    def __init__(self):
+        logger.exception('noise has already been applied to the spectrum')
+    pass
+
+class RadVelAlreadyAppliedError(Exception):
+    ## Description: 
+    #   radial velocity shift has already been applied to the spectrum
+    def __init__(self):
+        logger.exception('radial velocity shift has already been applied to the spectrum')
+    pass
+
+class VsiniAlreadyAppliedError(Exception):
+    ## Description: 
+    #   vsini has already been applied to the spectrum
+    def __init__(self):
+        logger.exception('vsini has already been applied to the spectrum')
+    pass
+
 
