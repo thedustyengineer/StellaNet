@@ -103,7 +103,7 @@ callbacks_list = [
 # on subsequent runs of the neural network (i.e. multiple runs to tweak hyperparameters)
 # you should use the saved .npy binaries from the last step.
 x_train, y_train = utilities.FileOperations.build_dataset_from_npy_binaries('/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_grid_400-670nm/x_train_all_params.npy', '/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_grid_400-670nm/y_train_all_params.npy')
-x_train, y_train = unison_shuffled_copies(x_train, y_train) # randomize the data set so that the validation set is not just the last x% of the data
+x_train, y_train = shuffle_arrays(x_train, y_train) # randomize the data set so that the validation set is not just the last x% of the data
 x_train = np.expand_dims(x_train, axis=2) # expand dims to what model.fit expects
 y_train = np.split(y_train,3, axis=1) # split the training labels
 print(x_train.shape) # check the shape
