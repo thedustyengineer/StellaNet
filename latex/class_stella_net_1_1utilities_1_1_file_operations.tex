@@ -8,19 +8,123 @@ Methods used for file operations (ie reading spectrum fits files, writing files,
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_a72c3c22445dd2ae1aa8a2f7c11c595a1}{read\+\_\+spectrum}} (file\+\_\+path, table\+\_\+num, wave\+\_\+header, flux\+\_\+header, error\+\_\+header)
-\begin{DoxyCompactList}\small\item\em Reads a fits formatted spectrum file and outputs a \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_a8e32daee0b2a94eedc7531dad3f7ddea}{read\+\_\+fits\+\_\+spectrum}} (file\+\_\+path, table\+\_\+num, wave\+\_\+header, flux\+\_\+header, error\+\_\+header, parse\+\_\+params=False, read\+\_\+range=None, is\+\_\+feros=False)
+\begin{DoxyCompactList}\small\item\em Reads a fits formatted spectrum file and outputs a \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_aaad17d2c1f85646a8e279adda93dd1fe}{read\+\_\+tsv\+\_\+spectrum}} (file\+\_\+path, read\+\_\+range=None, has\+\_\+errors=False, parse\+\_\+params=False)
+\begin{DoxyCompactList}\small\item\em Reads a tsv formatted spectrum file and outputs a \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_aee377768ce78f1524435f817033cfa96}{cut\+\_\+directory}} (input\+\_\+directory, output\+\_\+directory, start\+\_\+wave, end\+\_\+wave)
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_ac9be212770e0a5f98c5c033de006b71b}{write\+\_\+column\+\_\+spectrum}} (spectrum, file\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Reads a fits formatted spectrum file and outputs a \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_a2a2f7f3454bd75016ad6f67f087b2823}{build\+\_\+dataset\+\_\+from\+\_\+grid\+\_\+folder}} (directory, label\+\_\+index, save\+\_\+npy\+\_\+binary\+\_\+file=False)
+\begin{DoxyCompactList}\small\item\em Reads a directory containing fits formatted spectra and builds a Keras training dataset. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_a710d5b3345dee3ac70e7281054c6168b}{build\+\_\+dataset\+\_\+from\+\_\+npy\+\_\+binaries}} (x\+\_\+train\+\_\+path, y\+\_\+train\+\_\+path)
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_file_operations_ae04204143948567004250d916eb44a23}{Apply\+Perturbations}} (input\+\_\+directory, output\+\_\+directory, vsini=True, snr=True, rad\+\_\+vel=True)
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Methods used for file operations (ie reading spectrum fits files, writing files, converting files, etc) 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_a72c3c22445dd2ae1aa8a2f7c11c595a1}\label{class_stella_net_1_1utilities_1_1_file_operations_a72c3c22445dd2ae1aa8a2f7c11c595a1}} 
-\index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!read\_spectrum@{read\_spectrum}}
-\index{read\_spectrum@{read\_spectrum}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
-\doxysubsubsection{\texorpdfstring{read\_spectrum()}{read\_spectrum()}}
-{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+read\+\_\+spectrum (\begin{DoxyParamCaption}\item[{}]{file\+\_\+path,  }\item[{}]{table\+\_\+num,  }\item[{}]{wave\+\_\+header,  }\item[{}]{flux\+\_\+header,  }\item[{}]{error\+\_\+header }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_ae04204143948567004250d916eb44a23}\label{class_stella_net_1_1utilities_1_1_file_operations_ae04204143948567004250d916eb44a23}} 
+\index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!ApplyPerturbations@{ApplyPerturbations}}
+\index{ApplyPerturbations@{ApplyPerturbations}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
+\doxysubsubsection{\texorpdfstring{ApplyPerturbations()}{ApplyPerturbations()}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+Apply\+Perturbations (\begin{DoxyParamCaption}\item[{}]{input\+\_\+directory,  }\item[{}]{output\+\_\+directory,  }\item[{}]{vsini = {\ttfamily True},  }\item[{}]{snr = {\ttfamily True},  }\item[{}]{rad\+\_\+vel = {\ttfamily True} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_a2a2f7f3454bd75016ad6f67f087b2823}\label{class_stella_net_1_1utilities_1_1_file_operations_a2a2f7f3454bd75016ad6f67f087b2823}} 
+\index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!build\_dataset\_from\_grid\_folder@{build\_dataset\_from\_grid\_folder}}
+\index{build\_dataset\_from\_grid\_folder@{build\_dataset\_from\_grid\_folder}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
+\doxysubsubsection{\texorpdfstring{build\_dataset\_from\_grid\_folder()}{build\_dataset\_from\_grid\_folder()}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+build\+\_\+dataset\+\_\+from\+\_\+grid\+\_\+folder (\begin{DoxyParamCaption}\item[{}]{directory,  }\item[{}]{label\+\_\+index,  }\item[{}]{save\+\_\+npy\+\_\+binary\+\_\+file = {\ttfamily False} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads a directory containing fits formatted spectra and builds a Keras training dataset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em directory} & the path containing the fits format spectra files \\
+\hline
+{\em label\+\_\+index} & the index in the filename that indicates the label (i\+Spec format filenames, i.\+e. 3500\+\_\+2.\+50\+\_\+-\/1.\+00\+\_\+0.\+00\+\_\+2.\+00\+\_\+0.\+00\+\_\+0.\+00\+\_\+0.\+00.\+fits.\+gz) which is teff\+\_\+logg\+\_\+\+M\+H\+\_\+macturb\+\_\+vturb... \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+x\+\_\+train, y\+\_\+train tuple (both numpy arrays) where x\+\_\+train is the flux values and y\+\_\+train is the data labels 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_a710d5b3345dee3ac70e7281054c6168b}\label{class_stella_net_1_1utilities_1_1_file_operations_a710d5b3345dee3ac70e7281054c6168b}} 
+\index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!build\_dataset\_from\_npy\_binaries@{build\_dataset\_from\_npy\_binaries}}
+\index{build\_dataset\_from\_npy\_binaries@{build\_dataset\_from\_npy\_binaries}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
+\doxysubsubsection{\texorpdfstring{build\_dataset\_from\_npy\_binaries()}{build\_dataset\_from\_npy\_binaries()}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+build\+\_\+dataset\+\_\+from\+\_\+npy\+\_\+binaries (\begin{DoxyParamCaption}\item[{}]{x\+\_\+train\+\_\+path,  }\item[{}]{y\+\_\+train\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_aee377768ce78f1524435f817033cfa96}\label{class_stella_net_1_1utilities_1_1_file_operations_aee377768ce78f1524435f817033cfa96}} 
+\index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!cut\_directory@{cut\_directory}}
+\index{cut\_directory@{cut\_directory}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
+\doxysubsubsection{\texorpdfstring{cut\_directory()}{cut\_directory()}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+cut\+\_\+directory (\begin{DoxyParamCaption}\item[{}]{input\+\_\+directory,  }\item[{}]{output\+\_\+directory,  }\item[{}]{start\+\_\+wave,  }\item[{}]{end\+\_\+wave }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_a8e32daee0b2a94eedc7531dad3f7ddea}\label{class_stella_net_1_1utilities_1_1_file_operations_a8e32daee0b2a94eedc7531dad3f7ddea}} 
+\index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!read\_fits\_spectrum@{read\_fits\_spectrum}}
+\index{read\_fits\_spectrum@{read\_fits\_spectrum}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
+\doxysubsubsection{\texorpdfstring{read\_fits\_spectrum()}{read\_fits\_spectrum()}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+read\+\_\+fits\+\_\+spectrum (\begin{DoxyParamCaption}\item[{}]{file\+\_\+path,  }\item[{}]{table\+\_\+num,  }\item[{}]{wave\+\_\+header,  }\item[{}]{flux\+\_\+header,  }\item[{}]{error\+\_\+header,  }\item[{}]{parse\+\_\+params = {\ttfamily False},  }\item[{}]{read\+\_\+range = {\ttfamily None},  }\item[{}]{is\+\_\+feros = {\ttfamily False} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads a fits formatted spectrum file and outputs a \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & the path to the file that is to be read \\
+\hline
+{\em table\+\_\+num} & the table number of the .fits file containing the wavelength, flux, and error values \\
+\hline
+{\em wave\+\_\+header} & the string header of the wavelength values (if wavelength obtained via C\+D\+E\+L\+T1, C\+R\+V\+A\+L1, and N\+A\+X\+I\+S1 use \textquotesingle{}0\textquotesingle{}) \\
+\hline
+{\em flux\+\_\+header} & the string header of the flux values (use \textquotesingle{}0\textquotesingle{} if flux vals are all that is in data) \\
+\hline
+{\em error\+\_\+header} & the string header of the error values (may be \textquotesingle{}0\textquotesingle{} to use zeroes) \\
+\hline
+{\em parse\+\_\+params} & true if the application should parse parameters from the filename \\
+\hline
+{\em read\+\_\+range} & the range of wavelengths to include in nm and the number of points (i.\+e. \mbox{[}400, 600\mbox{]}), can be None if you want to read all. First value is inclusive, second value is exclusive. If the exact points do not exist then their closest match will be read (default None). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object generated from the file that was read 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_aaad17d2c1f85646a8e279adda93dd1fe}\label{class_stella_net_1_1utilities_1_1_file_operations_aaad17d2c1f85646a8e279adda93dd1fe}} 
+\index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!read\_tsv\_spectrum@{read\_tsv\_spectrum}}
+\index{read\_tsv\_spectrum@{read\_tsv\_spectrum}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
+\doxysubsubsection{\texorpdfstring{read\_tsv\_spectrum()}{read\_tsv\_spectrum()}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+read\+\_\+tsv\+\_\+spectrum (\begin{DoxyParamCaption}\item[{}]{file\+\_\+path,  }\item[{}]{read\+\_\+range = {\ttfamily None},  }\item[{}]{has\+\_\+errors = {\ttfamily False},  }\item[{}]{parse\+\_\+params = {\ttfamily False} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads a tsv formatted spectrum file and outputs a \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & the path to the file that is to be read \\
+\hline
+{\em read\+\_\+range} & the range of wavelengths to include in nm and the number of points (i.\+e. \mbox{[}400, 600\mbox{]}), can be None if you want to read all. First value is inclusive, second value is exclusive. If the exact points do not exist then their closest match will be read (default None). \\
+\hline
+{\em has\+\_\+errors} & should be true if the file has an errors column (default false) \\
+\hline
+{\em parse\+\_\+params} & true if the application should parse parameters from the filename \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object generated from the file that was read 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_file_operations_ac9be212770e0a5f98c5c033de006b71b}\label{class_stella_net_1_1utilities_1_1_file_operations_ac9be212770e0a5f98c5c033de006b71b}} 
+\index{StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}!write\_column\_spectrum@{write\_column\_spectrum}}
+\index{write\_column\_spectrum@{write\_column\_spectrum}!StellaNet.utilities.FileOperations@{StellaNet.utilities.FileOperations}}
+\doxysubsubsection{\texorpdfstring{write\_column\_spectrum()}{write\_column\_spectrum()}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+File\+Operations.\+write\+\_\+column\+\_\+spectrum (\begin{DoxyParamCaption}\item[{}]{spectrum,  }\item[{}]{file\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -40,10 +144,10 @@ Reads a fits formatted spectrum file and outputs a \mbox{\hyperlink{class_stella
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a Stella\+Net \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object generated from the file that was read 
+a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object generated from the file that was read 
 \end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-utilities.\+py\end{DoxyCompactItemize}
+\mbox{\hyperlink{utilities_8py}{utilities.\+py}}\end{DoxyCompactItemize}

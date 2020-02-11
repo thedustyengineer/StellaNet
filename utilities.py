@@ -20,6 +20,7 @@ import random
 import copy
 
 
+
 # setup
 logger = logging.getLogger('stella_net')
 
@@ -118,9 +119,13 @@ class FileOperations:
     # @param wave_header: the string header of the wavelength values (if wavelength obtained via CDELT1, CRVAL1, and NAXIS1 use '0')
     # @param flux_header: the string header of the flux values (use '0' if flux vals are all that is in data)
     # @param error_header: the string header of the error values (may be '0' to use zeroes)
+    # @param parse_params: true if the application should parse parameters from the filename
+    # @param read_range: the range of wavelengths to include in nm and the number of points (i.e. [400, 600]), 
+    # can be None if you want to read all. First value is inclusive, second value is exclusive.
+    # If the exact points do not exist then their closest match will be read (default None).
     # @return a StellaNet spectrum.Spectrum object generated from the file that was read
     @staticmethod
-    def read_fits_spectrum(file_path, table_num, wave_header, flux_header, error_header, parse_params = False):
+    def read_fits_spectrum(file_path, table_num, wave_header, flux_header, error_header, parse_params = False, read_range=None, is_feros=False):
         logger.info('Reading file at' + file_path)
 
         # the iSpec naming convention label indices
@@ -147,26 +152,55 @@ class FileOperations:
             w_delta = hdul[table_num].header['CDELT1']
             start_value = hdul[table_num].header['CRVAL1']
             w_count = hdul[table_num].header['NAXIS1']
-
             wave = ((np.arange(w_count) + 1.0) - pix_size) * w_delta + start_value
+
+        if is_feros:
+            wave = wave[0]
+            flux = flux[0]
+            error = error[0]
+
+        if min(wave) > 1000:
+                wave = wave/10.0
 
         if parse_params:
             filename = os.path.basename(file_path).split('_')
-            new_spectrum = spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
+            if (read_range != None):
+                # find left and right boundary indices
+                left_value_index = (np.abs(wave - read_range[0])).argmin()
+                right_value_index = (np.abs(wave - read_range[1])).argmin()
+
+                index_distance = right_value_index - left_value_index
+
+                wave = wave[left_value_index:right_value_index]
+                flux = flux[left_value_index:right_value_index]
+                
+                new_spectrum = spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
                 mh = filename[mh_label_index])
         else:
-            new_spectrum = spectrum.Spectrum(wave, flux, error)
+            if (read_range != None):
+                # find left and right boundary indices
+                left_value_index = (np.abs(wave - read_range[0])).argmin()
+                right_value_index = (np.abs(wave - read_range[1])).argmin()
+
+                index_distance = right_value_index - left_value_index
+
+                wave = wave[left_value_index:right_value_index]
+                flux = flux[left_value_index:right_value_index]
+                new_spectrum = spectrum.Spectrum(wave, flux, error)
 
         return new_spectrum
 
 
     ## Reads a tsv formatted spectrum file and outputs a spectrum.Spectrum object
     # @param file_path: the path to the file that is to be read
+    # @param read_range: the range of wavelengths to include in nm and the number of points (i.e. [400, 600]), 
+    # can be None if you want to read all. First value is inclusive, second value is exclusive.
+    # If the exact points do not exist then their closest match will be read (default None).
     # @param has_errors: should be true if the file has an errors column (default false)
     # @param parse_params: true if the application should parse parameters from the filename
     # @return a StellaNet spectrum.Spectrum object generated from the file that was read
     @staticmethod
-    def read_tsv_spectrum(file_path, has_errors=False, parse_params = False):
+    def read_tsv_spectrum(file_path, read_range=None, has_errors=False, parse_params = False):
         logger.info('Reading file at' + file_path)
 
         # the StellaNet naming convention label indices
@@ -178,15 +212,27 @@ class FileOperations:
         rad_vel_label_index = 5
 
         spectrum_file = np.loadtxt(file_path)
+
         wave = spectrum_file[:,0]
         flux = spectrum_file[:,1]
+
+        if (read_range != None):
+            # find left and right boundary indices
+            left_value_index = (np.abs(wave - read_range[0])).argmin()
+            right_value_index = (np.abs(wave - read_range[1])).argmin()
+
+            index_distance = right_value_index - left_value_index
+
+            wave = wave[left_value_index:right_value_index]
+            flux = flux[left_value_index:right_value_index]
+
         if has_errors:
             error = spectrum_file[:,2]
         else:
             error=None
         
         if parse_params:
-            filename = os.path.basename(file_path).split('_')
+            filename = os.path.basename(file_path).replace('.tsv','').replace('.fits','').split('_')
             new_spectrum = spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
                 mh = filename[mh_label_index], vsini_value = filename[vsini_label_index], noise_value = filename[snr_label_index], \
                 radial_velocity_shift = filename[rad_vel_label_index])
@@ -194,6 +240,14 @@ class FileOperations:
             new_spectrum = spectrum.Spectrum(wave, flux, error)
 
         return new_spectrum
+
+    @staticmethod
+    def cut_directory(input_directory, output_directory, start_wave, end_wave):
+        for file in os.listdir(input_directory):
+            if '.tsv' in file:
+                print('Adding file: ' + file)
+                this_spectrum = FileOperations.read_tsv_spectrum(input_directory + '/' + file, read_range=[start_wave, end_wave], parse_params=True)
+                this_spectrum.write_column_spectrum(output_directory, use_opt_params=True)
 
 
     ## Reads a fits formatted spectrum file and outputs a spectrum.Spectrum object
@@ -219,7 +273,7 @@ class FileOperations:
     # @return x_train, y_train tuple (both numpy arrays) where x_train is the flux values 
     # and y_train is the data labels
     @staticmethod
-    def build_dataset_from_grid_folder(directory, label_index):
+    def build_dataset_from_grid_folder(directory, label_index, save_npy_binary_file=False):
         x_train = []
         y_train = []
         for file in os.listdir(directory):
@@ -228,14 +282,27 @@ class FileOperations:
                 this_spectrum = FileOperations.read_fits_spectrum(directory + '/' + file,0,'0','0','0')
                 x_train.append(this_spectrum.fluxes)
                 filename = file.split('_')
-                y_train.append(int(filename[label_index]))
-            if '.tsv' in file:
-                logger.info('Adding file: ' + file)
+                y_train.append([float(filename[0]),float(filename[1]),float(filename[2])])
+            if ('.tsv' in file) and not ('._' in file):
+                #logger.info('Adding file: ' + file)
+                print('Adding file: ' + file)
                 this_spectrum = FileOperations.read_tsv_spectrum(directory + '/' + file, parse_params=True)
                 x_train.append(this_spectrum.fluxes)
-                y_train.append(np.array(int(this_spectrum.teff)))
+                y_train.append([float(this_spectrum.teff), float(this_spectrum.logg), float(this_spectrum.mh)])
+
+        if save_npy_binary_file:
+            np.save(directory + '/x_train_all_params.npy', np.asarray(x_train))
+            np.save(directory + '/y_train_all_params.npy', np.asarray(y_train))
+            
         return x_train, y_train
 
+    @staticmethod
+    def build_dataset_from_npy_binaries(x_train_path, y_train_path):
+        x_train = np.load(x_train_path)
+        y_train = np.load(y_train_path)
+        return x_train, y_train
+
+    
 
     @staticmethod
     def ApplyPerturbations(input_directory, output_directory, vsini=True, snr=True, rad_vel=True):
@@ -266,7 +333,7 @@ class FileOperations:
 
             if '.tsv' in file:
                 logger.info('Adding file: ' + file)
-                raw_spectrum = FileOperations.read_tsv_spectrum(input_directory + '/' + file, parse_params=True)
+                raw_spectrum = FileOperations.read_tsv_spectrum(input_directory + '/' + file, parse_params=True, read_range=[350,600])
                 isGridFile = True
 
             if isGridFile:
@@ -298,3 +365,5 @@ class FileOperations:
 #cspectrum.PlotSpectrum()
 
 #FileOperations.ApplyPerturbations('/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/grid','/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_grid')
+
+#FileOperations.cut_directory('/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_grid','/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_grid_400-670nm',400,670)

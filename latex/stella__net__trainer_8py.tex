@@ -1,0 +1,71 @@
+\hypertarget{stella__net__trainer_8py}{}\doxysection{stella\+\_\+net\+\_\+trainer.\+py File Reference}
+\label{stella__net__trainer_8py}\index{stella\_net\_trainer.py@{stella\_net\_trainer.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_af57a2e48516eab976e4032fbd9a64ccd}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+batch\+Output}} (batch, logs)
+\item 
+def \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a206e807db2dc8df93a6b6747b37b6d87}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+unison\+\_\+shuffled\+\_\+copies}} (a, b)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a3a57af5c2ded7e954172030225c72200}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+batch\+Log\+Callback}} = Lambda\+Callback(on\+\_\+batch\+\_\+end=batch\+Output)
+\item 
+int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_acee37d5b58e3d72f31a6caa5239350a6}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+num\+\_\+points}} = 27000
+\item 
+int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a936799ca18fe6fab60b0cd20db67d6b5}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+num\+\_\+columns}} = 1
+\item 
+int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a7eac1551635166f47f3f6da4c3fa73f6}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+input\+\_\+shape}} = num\+\_\+points $\ast$ num\+\_\+columns
+\item 
+int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a0e4b2f219a8c4acc4dabf868ba2190f7}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+B\+A\+T\+C\+H\+\_\+\+S\+I\+ZE}} = 64
+\item 
+int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_aa27a0aaf9fc718db3fc0a43a7b044654}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+E\+P\+O\+C\+HS}} = 1000
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_ae9652a98c3976aac55b8cad259cc1b6f}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+spectra\+\_\+input}} = Input(shape=(num\+\_\+points,1))
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a37ca27facc27e9f97b56f6544417f955}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+output\+\_\+1}} = Conv1D(100, 3, activation=\textquotesingle{}relu\textquotesingle{})(spectra\+\_\+input)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a5823085e1b731406cdc2bfae3c39503f}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+pred\+\_\+teff}} = Dense(1, activation=\textquotesingle{}relu\textquotesingle{}, name=\textquotesingle{}predicted\+\_\+teff\textquotesingle{})(output\+\_\+1)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a9e8f2e39ceaeb6cdd945a128cddcad61}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+output\+\_\+2}} = Conv1D(50, 5, strides=9, activation=\textquotesingle{}relu\textquotesingle{})(spectra\+\_\+input)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a5679beab63b733250548a670095fe61f}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+pred\+\_\+mh}} = Dense(1, activation=\textquotesingle{}linear\textquotesingle{}, name=\textquotesingle{}predicted\+\_\+mh\textquotesingle{})(output\+\_\+2)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_ac96b173dfc368c9e1a1f8d637b5cd57a}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+output\+\_\+3}} = Conv1D(100, 21, strides=21, activation=\textquotesingle{}relu\textquotesingle{})(spectra\+\_\+input)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_af14aa99f6a1abb00ece1f477059b4e51}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+outout\+\_\+3}} = Dropout(0.\+5)(output\+\_\+3)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_aebb795c42684144c4d6604ea1c5f89c4}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+pred\+\_\+logg}} = Dense(1, activation=\textquotesingle{}linear\textquotesingle{}, name=\textquotesingle{}predicted\+\_\+logg\textquotesingle{})(output\+\_\+3)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a39361d6b334b9d5846e3d11e50e573e2}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+model}} = Model(inputs=spectra\+\_\+input, outputs=\mbox{[}pred\+\_\+teff, pred\+\_\+logg, pred\+\_\+mh\mbox{]})
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a7d84a051024f8c165e04d7b47dea46bd}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+to\+\_\+file}}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_aab83a12d530d86c7ef0270604251c97a}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+show\+\_\+shapes}}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a3139b3bf432c9b0570e5612a4b7b8ee3}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+True}}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_ae1979f9585dae24044a6556103fa071d}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+show\+\_\+layer\+\_\+names}}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a98cf1259a00b3ac166bbe73d330f31a5}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+loss}}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a6da669ff40972af16656205c15ae8535}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+optimizer}}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_aaa1afb5bbe8159e1f36fbb688025f1e6}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+metrics}}
+\item 
+list \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a949d3792024e948156a50a60753f93ff}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+callbacks\+\_\+list}}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_adbf7328feb1c73c50dcaf267ee9c5257}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+x\+\_\+train}} = np.\+expand\+\_\+dims(x\+\_\+train, axis=2)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a6d4a08f43614c18d1a0a82bdf4c0f18b}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+y\+\_\+train}} = np.\+split(y\+\_\+train,3, axis=1)
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a38bfdc40ee86399b8d4e9def0859d789}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+history}}
+\item 
+\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a16e561fb03b98cc8d5fc5038257f2ddc}{Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+loc}}
+\end{DoxyCompactItemize}

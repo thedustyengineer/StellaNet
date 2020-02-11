@@ -11,13 +11,38 @@ Methods used to augment the model training data set and test sets.
 def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_perturbations_a4146231f282e844960b7b544fee95c1c}{apply\+\_\+vsini}} (spectrum, vsini\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Applies vsini broadening to the provided \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_perturbations_a9fc3bc8fc9a70cc561e71b6bc200e688}{apply\+\_\+snr}} (spectrum, snr)
-\begin{DoxyCompactList}\small\item\em Applies gaussian noise to the provided \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Applies gaussian noise to the provided \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_stella_net_1_1utilities_1_1_perturbations_a37c47e76718ef62748a45a020cd800a0}{apply\+\_\+rad\+\_\+vel\+\_\+shift}} (spectrum, velocity)
+\begin{DoxyCompactList}\small\item\em Applies a radial velocity (red/blueshift) to the provided \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Methods used to augment the model training data set and test sets. 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_perturbations_a37c47e76718ef62748a45a020cd800a0}\label{class_stella_net_1_1utilities_1_1_perturbations_a37c47e76718ef62748a45a020cd800a0}} 
+\index{StellaNet.utilities.Perturbations@{StellaNet.utilities.Perturbations}!apply\_rad\_vel\_shift@{apply\_rad\_vel\_shift}}
+\index{apply\_rad\_vel\_shift@{apply\_rad\_vel\_shift}!StellaNet.utilities.Perturbations@{StellaNet.utilities.Perturbations}}
+\doxysubsubsection{\texorpdfstring{apply\_rad\_vel\_shift()}{apply\_rad\_vel\_shift()}}
+{\footnotesize\ttfamily def Stella\+Net.\+utilities.\+Perturbations.\+apply\+\_\+rad\+\_\+vel\+\_\+shift (\begin{DoxyParamCaption}\item[{}]{spectrum,  }\item[{}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Applies a radial velocity (red/blueshift) to the provided \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spectrum} & a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. See \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} documentation for more info. \\
+\hline
+{\em velocity} & the radial velocity in km/s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the updated \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Relativistic radial velocity correction is based on\+: \href{http://spiff.rit.edu/classes/phys314/lectures/doppler/doppler.html}{\texttt{ http\+://spiff.\+rit.\+edu/classes/phys314/lectures/doppler/doppler.\+html}} 
+\end{DoxyNote}
 \mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_perturbations_a9fc3bc8fc9a70cc561e71b6bc200e688}\label{class_stella_net_1_1utilities_1_1_perturbations_a9fc3bc8fc9a70cc561e71b6bc200e688}} 
 \index{StellaNet.utilities.Perturbations@{StellaNet.utilities.Perturbations}!apply\_snr@{apply\_snr}}
 \index{apply\_snr@{apply\_snr}!StellaNet.utilities.Perturbations@{StellaNet.utilities.Perturbations}}
@@ -30,19 +55,14 @@ Applies gaussian noise to the provided \mbox{\hyperlink{class_stella_net_1_1spec
 
 
 \begin{DoxyParams}{Parameters}
-{\em spectrum} & a Stella\+Net \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. See \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} documentation for more info. \\
+{\em spectrum} & a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. See \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} documentation for more info. \\
 \hline
 {\em snr} & The desired signal to noise ratio \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-the updated Stella\+Net \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
+the updated \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
 \end{DoxyReturn}
-
-\begin{DoxyExceptions}{Exceptions}
-{\em \mbox{\hyperlink{class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error}{stella\+\_\+net\+\_\+exceptions.\+Wavelength\+Spacing\+Error}}} & \\
-\hline
-\end{DoxyExceptions}
 \mbox{\Hypertarget{class_stella_net_1_1utilities_1_1_perturbations_a4146231f282e844960b7b544fee95c1c}\label{class_stella_net_1_1utilities_1_1_perturbations_a4146231f282e844960b7b544fee95c1c}} 
 \index{StellaNet.utilities.Perturbations@{StellaNet.utilities.Perturbations}!apply\_vsini@{apply\_vsini}}
 \index{apply\_vsini@{apply\_vsini}!StellaNet.utilities.Perturbations@{StellaNet.utilities.Perturbations}}
@@ -55,13 +75,13 @@ Applies vsini broadening to the provided \mbox{\hyperlink{class_stella_net_1_1sp
 
 
 \begin{DoxyParams}{Parameters}
-{\em spectrum} & a Stella\+Net \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \\
+{\em spectrum} & a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. \\
 \hline
 {\em vsini\+\_\+value} & The vsini that should be applied in km/s as a float value \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-the updated Stella\+Net \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
+the updated \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object. 
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
@@ -75,4 +95,4 @@ Adapted from i\+Spec by Sergi-\/\+Blanco Cuaresma \href{https://www.blancocuares
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-utilities.\+py\end{DoxyCompactItemize}
+\mbox{\hyperlink{utilities_8py}{utilities.\+py}}\end{DoxyCompactItemize}

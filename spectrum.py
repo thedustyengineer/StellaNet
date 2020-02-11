@@ -12,8 +12,10 @@ from scipy.signal import fftconvolve
 from astropy.io import fits # DOCUMENTATION HERE: http://docs.astropy.org/en/stable/io/fits/
 import glob
 import csv
+import math
 from operator import itemgetter
 import matplotlib.pyplot as plt
+from scipy.interpolate import splrep,splev
 
 logger = logging.getLogger('stella_net')
 
@@ -156,21 +158,29 @@ class Spectrum:
         self.radial_velocity_shift_applied = True
         self.rad_vel_value = velocity/1000.
 
-    def write_column_spectrum(self, directory, use_opt_params=False):
+    def write_column_spectrum(self, directory, filename=None, use_opt_params=False):
         
         # make the directory if it doesn't exist
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-        if use_opt_params:
-            filename = self.teff + '_' + self.logg + '_' + self.mh + '_' + str(self.vsini_value) + '_' + str(self.noise_value) + '_' + str(self.rad_vel_value) + '.tsv'
-        else:
-            filename = self.teff + '_' + self.logg + '_' + self.mh + '.tsv'
+        if filename == None:
+            if use_opt_params:
+                filename = self.teff + '_' + self.logg + '_' + self.mh + '_' + str(self.vsini_value) + '_' + str(self.noise_value) + '_' + str(self.rad_vel_value) + '.tsv'
+            else:
+                filename = self.teff + '_' + self.logg + '_' + self.mh + '.tsv'
 
-        with open(directory + '/' + filename,"a") as csvfile:
-                rows = zip(np.round(self.wavelengths,6), np.round(self.fluxes,3), np.round(self.errors,3))
-                for row in rows:
-                    csvfile.write("{0}\t{1}\t{2}\n".format(*row))
+        if self.errors is not None:
+            with open(directory + '/' + filename,"a") as csvfile:
+                    rows = zip(np.round(self.wavelengths,6), np.round(self.fluxes,3), np.round(self.errors,3))
+                    for row in rows:
+                        csvfile.write("{0}\t{1}\t{2}\n".format(*row))
+        else:
+            with open(directory + '/' + filename,"a") as csvfile:
+                    rows = zip(np.round(self.wavelengths,6), np.round(self.fluxes,3))
+                    for row in rows:
+                        csvfile.write("{0}\t{1}\n".format(*row))
+
 
     def PlotSpectrum(self, existing_plot=None):
         plt.plot(self.wavelengths, self.fluxes)
@@ -178,3 +188,91 @@ class Spectrum:
         plt.ylabel('Flux')
         plt.xlabel('Wavelength')
         plt.show()
+
+    def CutAndInterpolateFluxesToGrid(self, wave_count, shape=27000, replace_nan=False):
+        waves = np.asarray(self.wavelengths) # the current wavelength spacing
+        fluxes = np.asarray(self.fluxes) # the current fluxes
+        if replace_nan:
+            for idx, flux in enumerate(fluxes):
+                if (np.isnan(flux) or flux == 'nan'):
+                    print('fixing nan')
+                    fluxes[idx] = 1.0
+
+        if (min(waves) > 1000): # check if in A or nm
+            waves = waves/10 # convert to nm
+
+        min_wave = min(waves)
+        max_wave = max(waves)
+
+        #waves.argmax(waves<300)
+        #print()
+        
+        grid_waves = np.linspace(min_wave, max_wave, shape) # the ideal wavelength spacing
+        fluxterp = np.interp(grid_waves, waves, fluxes) # calculate the interpolated fluxes
+        #vals_before = int((min_wave-300)/0.01) + 1 # the number of ones to pad with at the beginning of the array
+        #vals_after = int((700-max_wave)/0.01) # the number of ones to pad with at the end of the array
+        #dont_pad = False
+        #if (vals_before < 0): vals_before = 0
+        #if (vals_after < 0): vals_after = 0
+        #if ((min_wave < 300) or (max_wave < 700)):
+            #grid_waves = np.pad(grid_waves, (vals_before, vals_after), mode='constant', constant_values = (0,0))
+            #fluxterp = np.pad(fluxterp, (vals_before, vals_after), mode='constant', constant_values = (0,0))
+        self.fluxes = fluxterp
+        self.wavelengths = grid_waves
+
+
+    def MaxNormalize(self):
+        self.fluxes = self.fluxes/max(self.fluxes)
+
+
+    @staticmethod
+    def findIndex(array,value):
+        element = min(range(len(array)), key=lambda x:abs(array[x]-value))
+        return(element)
+
+    # break spectrum up into segments based on knot spacing and place spline knots at those locations, then linterp the continuum from the resulting
+    # cubic spline and divide by that continuum
+    def SplineNormalize(self, knot_window_spacing):
+        waves = self.wavelengths
+        fluxes = self.fluxes
+        
+
+       
+        # Initialize arrays that will hold the x and y values of the continuum
+        wcont=[]
+        fcont=[]
+
+
+        # initialize the first anchor window
+        anchor_window = [min(waves), min(waves) + knot_window_spacing]
+        while (anchor_window[1] < max(waves)):  # Find anchor position indices at the boundaries of the anchor window
+            left_index = self.findIndex(waves,anchor_window[0])
+            right_index = self.findIndex(waves,anchor_window[1])
+            local_max = max(fluxes[left_index:right_index])
+            anchor_index = self.findIndex(fluxes[left_index:right_index],local_max)
+            if (waves[anchor_index + left_index] not in wcont):
+                fcont.append(fluxes[anchor_index + left_index]) # must add left index because find index returns index in range left_index:right_index
+                wcont.append(waves[anchor_index + left_index])
+            anchor_window  = [anchor_window[0] + knot_window_spacing, anchor_window[1] + knot_window_spacing]
+
+        # add a point to the beginning and end of wcont so that the full wavelength range is covered
+        #np.insert(wcont, 0, min(waves))
+        #np.insert(fcont, 0, max(fluxes[0:20])) # set the first flux cont value to be the max on the left side of fluxes 
+        #np.append(wcont, max(waves))
+        #np.append(fcont, max(fluxes[fluxes.size-20:fluxes.size-1]))
+        # Perform a spline fit on the anchor points to smooth out the continuum
+        # spl = UnivariateSpline(wcont,fcont,s=0.8)
+
+        # interpolate the continuum to match the wavelengths of the observed spectrum
+        #fluxcont = np.interp(waves, wcont, fcont)
+        
+        spl = splrep(wcont,fcont,k=3)
+        continuum = splev(waves,spl)
+
+        self.fluxes = self.fluxes/continuum
+        for flux in self.fluxes:
+            if (np.isnan(flux) or flux == 'nan'):
+                print('fixing nan')
+                flux = 1.0
+
+       
