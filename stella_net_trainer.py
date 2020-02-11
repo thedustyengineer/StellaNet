@@ -32,9 +32,9 @@ from keras.models import load_model, Model
 # @return the shuffled arrays
 def shuffle_arrays(arr1, arr2):
     if (len(arr1) != len(arr2)):
-        raise Exception(ArrayShapeMismatch)
-    p = np.random.permutation(len(a))
-    return a[p], b[p]
+        raise stella_net_exceptions.ArrayLengthMismatchError
+    p = np.random.permutation(len(arr1))
+    return arr1[p], arr2[p]
 
 ## Callback function to get batch info to print for each batch
 # @param batch - the batch
