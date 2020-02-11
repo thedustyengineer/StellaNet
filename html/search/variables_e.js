@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vsini_5fapplied_194',['vsini_applied',['../class_stella_net_1_1spectrum_1_1_spectrum.html#a064981df88646e4b275db028bbf0833e',1,'StellaNet::spectrum::Spectrum']]],
-  ['vsini_5fvalue_195',['vsini_value',['../class_stella_net_1_1spectrum_1_1_spectrum.html#abc98b3335cf4650383bd6799d525e21b',1,'StellaNet::spectrum::Spectrum']]]
+  ['vsini_5fapplied_189',['vsini_applied',['../class_stella_net_1_1stella__net__spectrum_1_1_spectrum.html#a3f1bbacda4576a9f6b78f745939744fd',1,'StellaNet::stella_net_spectrum::Spectrum']]],
+  ['vsini_5fvalue_190',['vsini_value',['../class_stella_net_1_1stella__net__spectrum_1_1_spectrum.html#ad558597df3b472e92f2b2b891bee8e1d',1,'StellaNet::stella_net_spectrum::Spectrum']]]
 ];

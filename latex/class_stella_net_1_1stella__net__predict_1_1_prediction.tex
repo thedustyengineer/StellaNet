@@ -1,11 +1,19 @@
 \hypertarget{class_stella_net_1_1stella__net__predict_1_1_prediction}{}\doxysection{Stella\+Net.\+stella\+\_\+net\+\_\+predict.\+Prediction Class Reference}
 \label{class_stella_net_1_1stella__net__predict_1_1_prediction}\index{StellaNet.stella\_net\_predict.Prediction@{StellaNet.stella\_net\_predict.Prediction}}
+
+
+Methods used for prediction with the neural network.  
+
+
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{class_stella_net_1_1stella__net__predict_1_1_prediction_a0d2498cc736acfe7a5a8958cc47fd49e}{get\+Predictions}} (spectrum)
 \begin{DoxyCompactList}\small\item\em Gets predictions for effective temperature, log g, and metallicity (\mbox{[}M/H\mbox{]}) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Methods used for prediction with the neural network. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_stella_net_1_1stella__net__predict_1_1_prediction_a0d2498cc736acfe7a5a8958cc47fd49e}\label{class_stella_net_1_1stella__net__predict_1_1_prediction_a0d2498cc736acfe7a5a8958cc47fd49e}} 
@@ -20,12 +28,15 @@ Gets predictions for effective temperature, log g, and metallicity (\mbox{[}M/H\
 
 
 \begin{DoxyParams}{Parameters}
-{\em a} & \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1spectrum_1_1_spectrum}{spectrum.\+Spectrum}} object that the predictions will be generated for \\
+{\em a} & \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} spectrum.\+Spectrum object that the predictions will be generated for \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 a tuple of teff (K), log g (dex), \mbox{[}M/H\mbox{]} (dex) 
 \end{DoxyReturn}
+\begin{DoxyNote}{Note}
+change model files internal to the function if necessary, defaults are as specified in project document 
+\end{DoxyNote}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

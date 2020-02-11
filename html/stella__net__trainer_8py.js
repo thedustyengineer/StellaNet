@@ -1,7 +1,7 @@
 var stella__net__trainer_8py =
 [
     [ "batchOutput", "stella__net__trainer_8py.html#af57a2e48516eab976e4032fbd9a64ccd", null ],
-    [ "unison_shuffled_copies", "stella__net__trainer_8py.html#a206e807db2dc8df93a6b6747b37b6d87", null ],
+    [ "shuffle_arrays", "stella__net__trainer_8py.html#a39e309546825d14f9c81e6093a2981d5", null ],
     [ "BATCH_SIZE", "stella__net__trainer_8py.html#a0e4b2f219a8c4acc4dabf868ba2190f7", null ],
     [ "batchLogCallback", "stella__net__trainer_8py.html#a3a57af5c2ded7e954172030225c72200", null ],
     [ "callbacks_list", "stella__net__trainer_8py.html#a949d3792024e948156a50a60753f93ff", null ],

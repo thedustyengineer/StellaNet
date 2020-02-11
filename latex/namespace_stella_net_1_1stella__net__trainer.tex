@@ -3,10 +3,10 @@
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+def \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a39e309546825d14f9c81e6093a2981d5}{shuffle\+\_\+arrays}} (arr1, arr2)
+\begin{DoxyCompactList}\small\item\em Shuffles the input data such that the labels and data are shuffled in the same way must be run before training begins so that training and validation sets are randomized. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_af57a2e48516eab976e4032fbd9a64ccd}{batch\+Output}} (batch, logs)
-\item 
-def \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a206e807db2dc8df93a6b6747b37b6d87}{unison\+\_\+shuffled\+\_\+copies}} (a, b)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Callback function to get batch info to print for each batch. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,7 +20,7 @@ int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a7eac155163516
 \item 
 int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a0e4b2f219a8c4acc4dabf868ba2190f7}{B\+A\+T\+C\+H\+\_\+\+S\+I\+ZE}} = 64
 \item 
-int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_aa27a0aaf9fc718db3fc0a43a7b044654}{E\+P\+O\+C\+HS}} = 1000
+int \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_aa27a0aaf9fc718db3fc0a43a7b044654}{E\+P\+O\+C\+HS}} = 300
 \item 
 \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_ae9652a98c3976aac55b8cad259cc1b6f}{spectra\+\_\+input}} = Input(shape=(\mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_acee37d5b58e3d72f31a6caa5239350a6}{num\+\_\+points}},1))
 \item 
@@ -63,7 +63,7 @@ list \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a949d3792024e
 \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a38bfdc40ee86399b8d4e9def0859d789}{history}}
 \item 
 \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a16e561fb03b98cc8d5fc5038257f2ddc}{loc}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Plot training \& validation accuracy values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -73,12 +73,42 @@ list \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a949d3792024e
 \doxysubsubsection{\texorpdfstring{batchOutput()}{batchOutput()}}
 {\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+batch\+Output (\begin{DoxyParamCaption}\item[{}]{batch,  }\item[{}]{logs }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{namespace_stella_net_1_1stella__net__trainer_a206e807db2dc8df93a6b6747b37b6d87}\label{namespace_stella_net_1_1stella__net__trainer_a206e807db2dc8df93a6b6747b37b6d87}} 
-\index{StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}!unison\_shuffled\_copies@{unison\_shuffled\_copies}}
-\index{unison\_shuffled\_copies@{unison\_shuffled\_copies}!StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}}
-\doxysubsubsection{\texorpdfstring{unison\_shuffled\_copies()}{unison\_shuffled\_copies()}}
-{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+unison\+\_\+shuffled\+\_\+copies (\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{b }\end{DoxyParamCaption})}
 
+
+Callback function to get batch info to print for each batch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch} & -\/ the batch \\
+\hline
+{\em logs} & -\/ the log data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespace_stella_net_1_1stella__net__trainer_a39e309546825d14f9c81e6093a2981d5}\label{namespace_stella_net_1_1stella__net__trainer_a39e309546825d14f9c81e6093a2981d5}} 
+\index{StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}!shuffle\_arrays@{shuffle\_arrays}}
+\index{shuffle\_arrays@{shuffle\_arrays}!StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}}
+\doxysubsubsection{\texorpdfstring{shuffle\_arrays()}{shuffle\_arrays()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+shuffle\+\_\+arrays (\begin{DoxyParamCaption}\item[{}]{arr1,  }\item[{}]{arr2 }\end{DoxyParamCaption})}
+
+
+
+Shuffles the input data such that the labels and data are shuffled in the same way must be run before training begins so that training and validation sets are randomized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arr1} & -\/ first array \\
+\hline
+{\em arr2} & -\/ second array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the shuffled arrays 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{class_stella_net_1_1stella__net__exceptions_1_1_array_length_mismatch_error}{stella\+\_\+net\+\_\+exceptions.\+Array\+Length\+Mismatch\+Error}}} & \\
+\hline
+\end{DoxyExceptions}
 
 
 \doxysubsection{Variable Documentation}
@@ -116,7 +146,7 @@ list \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a949d3792024e
 \index{StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}!EPOCHS@{EPOCHS}}
 \index{EPOCHS@{EPOCHS}!StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}}
 \doxysubsubsection{\texorpdfstring{EPOCHS}{EPOCHS}}
-{\footnotesize\ttfamily int Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+E\+P\+O\+C\+HS = 1000}
+{\footnotesize\ttfamily int Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+E\+P\+O\+C\+HS = 300}
 
 \mbox{\Hypertarget{namespace_stella_net_1_1stella__net__trainer_a38bfdc40ee86399b8d4e9def0859d789}\label{namespace_stella_net_1_1stella__net__trainer_a38bfdc40ee86399b8d4e9def0859d789}} 
 \index{StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}!history@{history}}
@@ -146,6 +176,10 @@ list \mbox{\hyperlink{namespace_stella_net_1_1stella__net__trainer_a949d3792024e
 \index{loc@{loc}!StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}}
 \doxysubsubsection{\texorpdfstring{loc}{loc}}
 {\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+trainer.\+loc}
+
+
+
+Plot training \& validation accuracy values. 
 
 \mbox{\Hypertarget{namespace_stella_net_1_1stella__net__trainer_a98cf1259a00b3ac166bbe73d330f31a5}\label{namespace_stella_net_1_1stella__net__trainer_a98cf1259a00b3ac166bbe73d330f31a5}} 
 \index{StellaNet.stella\_net\_trainer@{StellaNet.stella\_net\_trainer}!loss@{loss}}

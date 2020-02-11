@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fileoperations_100',['FileOperations',['../class_stella_net_1_1utilities_1_1_file_operations.html',1,'StellaNet::utilities']]]
+  ['arraylengthmismatcherror_98',['ArrayLengthMismatchError',['../class_stella_net_1_1stella__net__exceptions_1_1_array_length_mismatch_error.html',1,'StellaNet::stella_net_exceptions']]]
 ];

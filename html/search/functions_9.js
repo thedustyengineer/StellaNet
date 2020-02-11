@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['read_5ffits_5fspectrum_147',['read_fits_spectrum',['../class_stella_net_1_1utilities_1_1_file_operations.html#a8e32daee0b2a94eedc7531dad3f7ddea',1,'StellaNet::utilities::FileOperations']]],
-  ['read_5ftsv_5fspectrum_148',['read_tsv_spectrum',['../class_stella_net_1_1utilities_1_1_file_operations.html#aaad17d2c1f85646a8e279adda93dd1fe',1,'StellaNet::utilities::FileOperations']]]
+  ['read_5ffits_5fspectrum_143',['read_fits_spectrum',['../class_stella_net_1_1stella__net__utilities_1_1_file_operations.html#abb41117b99e7fdfc3851eb25bd2b8916',1,'StellaNet::stella_net_utilities::FileOperations']]],
+  ['read_5ftsv_5fspectrum_144',['read_tsv_spectrum',['../class_stella_net_1_1stella__net__utilities_1_1_file_operations.html#a706289bfbfab8fb6a999f51c975c506b',1,'StellaNet::stella_net_utilities::FileOperations']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['spectrum_107',['Spectrum',['../class_stella_net_1_1spectrum_1_1_spectrum.html',1,'StellaNet::spectrum']]]
+  ['radvelalreadyappliederror_105',['RadVelAlreadyAppliedError',['../class_stella_net_1_1stella__net__exceptions_1_1_rad_vel_already_applied_error.html',1,'StellaNet::stella_net_exceptions']]]
 ];

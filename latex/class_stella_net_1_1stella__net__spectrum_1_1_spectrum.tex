@@ -1,0 +1,244 @@
+\hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum}{}\doxysection{Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum Class Reference}
+\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum}\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+
+
+\mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum}{Spectrum}} object definition.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a8baff48e99f7db46e442512aac0d25b5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a75a8af4e8c531f7f12a41df6f4440d7a}{wavelengths}}, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aab45ffa8653acb91724016177c78a7ed}{fluxes}}, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ab4557487b00c4598db50e1df03ed2553}{errors}}, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a3f1bbacda4576a9f6b78f745939744fd}{vsini\+\_\+applied}}=False, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ad558597df3b472e92f2b2b891bee8e1d}{vsini\+\_\+value}}=0, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a3b5d068d3501afe21465525d20d0b0f1}{noise\+\_\+applied}}=False, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a8ef8a453bb3b6ae3cd423a09818551cd}{noise\+\_\+value}}=0, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a978783f63cf88f1041e78e590693083f}{radial\+\_\+velocity\+\_\+shift\+\_\+applied}}=False, radial\+\_\+velocity\+\_\+shift=0, is\+\_\+synthetic=True, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a624a9660d4a258e0465f604925ef4391}{teff}}=None, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a90d5cf0ef848b1bc0f03463909151cbe}{mh}}=None, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aac82766174024e8f6c27e44dfbc9b2fc}{logg}}=None)
+\begin{DoxyCompactList}\small\item\em Object representing a stellar spectrum (or synthetic spectrum) and all of its associated parameters. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a1c38c1badb15f58c32027945e6a12e32}{apply\+\_\+vsini}} (self, \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ad558597df3b472e92f2b2b891bee8e1d}{vsini\+\_\+value}})
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a6f7db0bda574245f62a031d33beaa606}{apply\+\_\+snr}} (self, snr)
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ab232647a30e539e528d678946b9bdf9a}{apply\+\_\+rad\+\_\+vel\+\_\+shift}} (self, velocity)
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a7b21206f781747b9b959f9e0c3dd27a1}{write\+\_\+column\+\_\+spectrum}} (self, directory, filename=None, use\+\_\+opt\+\_\+params=False)
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a446a324ff15c256334d3a62e67e94990}{Plot\+Spectrum}} (self, existing\+\_\+plot=None)
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a13d6dd31d99afd5808b9a48ab23bd0e6}{Cut\+And\+Interpolate\+Fluxes\+To\+Grid}} (self, wave\+\_\+count, shape=27000, replace\+\_\+nan=False)
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a23e536095a8481dd7a23f910c3c9aca4}{Max\+Normalize}} (self)
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ad425dc9a42cf49d461ebbadafca9b75a}{Spline\+Normalize}} (self, knot\+\_\+window\+\_\+spacing)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aeb8dfe512528295b1c61253d8a708e34}{find\+Index}} (array, value)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a75a8af4e8c531f7f12a41df6f4440d7a}{wavelengths}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aab45ffa8653acb91724016177c78a7ed}{fluxes}}
+\begin{DoxyCompactList}\small\item\em Central point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ab4557487b00c4598db50e1df03ed2553}{errors}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a624a9660d4a258e0465f604925ef4391}{teff}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aac82766174024e8f6c27e44dfbc9b2fc}{logg}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a90d5cf0ef848b1bc0f03463909151cbe}{mh}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a3b5d068d3501afe21465525d20d0b0f1}{noise\+\_\+applied}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a8ef8a453bb3b6ae3cd423a09818551cd}{noise\+\_\+value}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a978783f63cf88f1041e78e590693083f}{radial\+\_\+velocity\+\_\+shift\+\_\+applied}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a24e55fde2140634f2aa886d478d2c994}{rad\+\_\+vel\+\_\+value}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a3f1bbacda4576a9f6b78f745939744fd}{vsini\+\_\+applied}}
+\item 
+\mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ad558597df3b472e92f2b2b891bee8e1d}{vsini\+\_\+value}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} \mbox{\hyperlink{class_stella_net_1_1stella__net__spectrum_1_1_spectrum}{Spectrum}} object definition. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a8baff48e99f7db46e442512aac0d25b5}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a8baff48e99f7db46e442512aac0d25b5}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{wavelengths,  }\item[{}]{fluxes,  }\item[{}]{errors,  }\item[{}]{vsini\+\_\+applied = {\ttfamily False},  }\item[{}]{vsini\+\_\+value = {\ttfamily 0},  }\item[{}]{noise\+\_\+applied = {\ttfamily False},  }\item[{}]{noise\+\_\+value = {\ttfamily 0},  }\item[{}]{radial\+\_\+velocity\+\_\+shift\+\_\+applied = {\ttfamily False},  }\item[{}]{radial\+\_\+velocity\+\_\+shift = {\ttfamily 0},  }\item[{}]{is\+\_\+synthetic = {\ttfamily True},  }\item[{}]{teff = {\ttfamily None},  }\item[{}]{mh = {\ttfamily None},  }\item[{}]{logg = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Object representing a stellar spectrum (or synthetic spectrum) and all of its associated parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & the object instance \\
+\hline
+{\em wavelengths} & the spectrum wavelength values in Angstroms \\
+\hline
+{\em fluxes} & the normalized spectrum flux values \\
+\hline
+{\em errors} & the per-\/wavelength errors in the flux (normalized accordingly) \\
+\hline
+{\em vsini\+\_\+applied} & (default\+: False) bool indicating if the spectrum has been rotationally broadened \\
+\hline
+{\em vsini\+\_\+value} & (default\+: 0) int indicating the vsini in km/s of the spectrum \\
+\hline
+{\em noise\+\_\+applied} & (default\+: False) bool indicating if the spectrum has been perturbed with an S\+NR value \\
+\hline
+{\em noise\+\_\+value} & (default\+: 0) int indicating the S\+NR \\
+\hline
+{\em radial\+\_\+velocity\+\_\+shift\+\_\+applied} & (default\+: False) bool indicating if the spectrum has been red or blue shifted \\
+\hline
+{\em radial\+\_\+velocity\+\_\+shift} & (default\+: 0) a float indicating the radial velocity shift applied to the spectrum in km/s \\
+\hline
+{\em is\+\_\+synthetic} & (default\+: True) bool indicating if the spectrum is synthetic or not \\
+\hline
+{\em snr} & The desired signal to noise ratio \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ab232647a30e539e528d678946b9bdf9a}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ab232647a30e539e528d678946b9bdf9a}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!apply\_rad\_vel\_shift@{apply\_rad\_vel\_shift}}
+\index{apply\_rad\_vel\_shift@{apply\_rad\_vel\_shift}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{apply\_rad\_vel\_shift()}{apply\_rad\_vel\_shift()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+apply\+\_\+rad\+\_\+vel\+\_\+shift (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{velocity }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a6f7db0bda574245f62a031d33beaa606}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a6f7db0bda574245f62a031d33beaa606}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!apply\_snr@{apply\_snr}}
+\index{apply\_snr@{apply\_snr}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{apply\_snr()}{apply\_snr()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+apply\+\_\+snr (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{snr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a1c38c1badb15f58c32027945e6a12e32}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a1c38c1badb15f58c32027945e6a12e32}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!apply\_vsini@{apply\_vsini}}
+\index{apply\_vsini@{apply\_vsini}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{apply\_vsini()}{apply\_vsini()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+apply\+\_\+vsini (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{vsini\+\_\+value }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a13d6dd31d99afd5808b9a48ab23bd0e6}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a13d6dd31d99afd5808b9a48ab23bd0e6}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!CutAndInterpolateFluxesToGrid@{CutAndInterpolateFluxesToGrid}}
+\index{CutAndInterpolateFluxesToGrid@{CutAndInterpolateFluxesToGrid}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{CutAndInterpolateFluxesToGrid()}{CutAndInterpolateFluxesToGrid()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+Cut\+And\+Interpolate\+Fluxes\+To\+Grid (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{wave\+\_\+count,  }\item[{}]{shape = {\ttfamily 27000},  }\item[{}]{replace\+\_\+nan = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aeb8dfe512528295b1c61253d8a708e34}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aeb8dfe512528295b1c61253d8a708e34}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!findIndex@{findIndex}}
+\index{findIndex@{findIndex}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{findIndex()}{findIndex()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+find\+Index (\begin{DoxyParamCaption}\item[{}]{array,  }\item[{}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a23e536095a8481dd7a23f910c3c9aca4}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a23e536095a8481dd7a23f910c3c9aca4}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!MaxNormalize@{MaxNormalize}}
+\index{MaxNormalize@{MaxNormalize}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{MaxNormalize()}{MaxNormalize()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+Max\+Normalize (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a446a324ff15c256334d3a62e67e94990}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a446a324ff15c256334d3a62e67e94990}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!PlotSpectrum@{PlotSpectrum}}
+\index{PlotSpectrum@{PlotSpectrum}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{PlotSpectrum()}{PlotSpectrum()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+Plot\+Spectrum (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{existing\+\_\+plot = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ad425dc9a42cf49d461ebbadafca9b75a}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ad425dc9a42cf49d461ebbadafca9b75a}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!SplineNormalize@{SplineNormalize}}
+\index{SplineNormalize@{SplineNormalize}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{SplineNormalize()}{SplineNormalize()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+Spline\+Normalize (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{knot\+\_\+window\+\_\+spacing }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a7b21206f781747b9b959f9e0c3dd27a1}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a7b21206f781747b9b959f9e0c3dd27a1}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!write\_column\_spectrum@{write\_column\_spectrum}}
+\index{write\_column\_spectrum@{write\_column\_spectrum}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{write\_column\_spectrum()}{write\_column\_spectrum()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+write\+\_\+column\+\_\+spectrum (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{directory,  }\item[{}]{filename = {\ttfamily None},  }\item[{}]{use\+\_\+opt\+\_\+params = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ab4557487b00c4598db50e1df03ed2553}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ab4557487b00c4598db50e1df03ed2553}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!errors@{errors}}
+\index{errors@{errors}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{errors}{errors}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+errors}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aab45ffa8653acb91724016177c78a7ed}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aab45ffa8653acb91724016177c78a7ed}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!fluxes@{fluxes}}
+\index{fluxes@{fluxes}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{fluxes}{fluxes}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+fluxes}
+
+
+
+Central point. 
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aac82766174024e8f6c27e44dfbc9b2fc}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_aac82766174024e8f6c27e44dfbc9b2fc}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!logg@{logg}}
+\index{logg@{logg}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{logg}{logg}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+logg}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a90d5cf0ef848b1bc0f03463909151cbe}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a90d5cf0ef848b1bc0f03463909151cbe}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!mh@{mh}}
+\index{mh@{mh}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{mh}{mh}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+mh}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a3b5d068d3501afe21465525d20d0b0f1}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a3b5d068d3501afe21465525d20d0b0f1}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!noise\_applied@{noise\_applied}}
+\index{noise\_applied@{noise\_applied}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{noise\_applied}{noise\_applied}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+noise\+\_\+applied}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a8ef8a453bb3b6ae3cd423a09818551cd}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a8ef8a453bb3b6ae3cd423a09818551cd}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!noise\_value@{noise\_value}}
+\index{noise\_value@{noise\_value}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{noise\_value}{noise\_value}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+noise\+\_\+value}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a24e55fde2140634f2aa886d478d2c994}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a24e55fde2140634f2aa886d478d2c994}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!rad\_vel\_value@{rad\_vel\_value}}
+\index{rad\_vel\_value@{rad\_vel\_value}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{rad\_vel\_value}{rad\_vel\_value}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+rad\+\_\+vel\+\_\+value}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a978783f63cf88f1041e78e590693083f}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a978783f63cf88f1041e78e590693083f}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!radial\_velocity\_shift\_applied@{radial\_velocity\_shift\_applied}}
+\index{radial\_velocity\_shift\_applied@{radial\_velocity\_shift\_applied}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{radial\_velocity\_shift\_applied}{radial\_velocity\_shift\_applied}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+radial\+\_\+velocity\+\_\+shift\+\_\+applied}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a624a9660d4a258e0465f604925ef4391}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a624a9660d4a258e0465f604925ef4391}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!teff@{teff}}
+\index{teff@{teff}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{teff}{teff}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+teff}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a3f1bbacda4576a9f6b78f745939744fd}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a3f1bbacda4576a9f6b78f745939744fd}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!vsini\_applied@{vsini\_applied}}
+\index{vsini\_applied@{vsini\_applied}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{vsini\_applied}{vsini\_applied}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+vsini\+\_\+applied}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ad558597df3b472e92f2b2b891bee8e1d}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_ad558597df3b472e92f2b2b891bee8e1d}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!vsini\_value@{vsini\_value}}
+\index{vsini\_value@{vsini\_value}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{vsini\_value}{vsini\_value}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+vsini\+\_\+value}
+
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a75a8af4e8c531f7f12a41df6f4440d7a}\label{class_stella_net_1_1stella__net__spectrum_1_1_spectrum_a75a8af4e8c531f7f12a41df6f4440d7a}} 
+\index{StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}!wavelengths@{wavelengths}}
+\index{wavelengths@{wavelengths}!StellaNet.stella\_net\_spectrum.Spectrum@{StellaNet.stella\_net\_spectrum.Spectrum}}
+\doxysubsubsection{\texorpdfstring{wavelengths}{wavelengths}}
+{\footnotesize\ttfamily Stella\+Net.\+stella\+\_\+net\+\_\+spectrum.\+Spectrum.\+wavelengths}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{stella__net__spectrum_8py}{stella\+\_\+net\+\_\+spectrum.\+py}}\end{DoxyCompactItemize}

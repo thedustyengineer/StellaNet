@@ -16,6 +16,8 @@ class Prediction:
     ## Gets predictions for effective temperature, log g, and metallicity ([M/H])
     # @param a StellaNet spectrum.Spectrum object that the predictions will be generated for
     # @return a tuple of teff (K), log g (dex), [M/H] (dex)
+    # @note change model files internal to the function if necessary, defaults are as specified
+    # in project document
     @staticmethod
     def getPredictions(spectrum):
         logg_mh_model = load_model('best_model.06-1213.08-0.20-0.09.h5') # this model is good only for log g and [M/H]

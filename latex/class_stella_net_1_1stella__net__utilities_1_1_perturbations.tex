@@ -1,0 +1,98 @@
+\hypertarget{class_stella_net_1_1stella__net__utilities_1_1_perturbations}{}\doxysection{Stella\+Net.\+stella\+\_\+net\+\_\+utilities.\+Perturbations Class Reference}
+\label{class_stella_net_1_1stella__net__utilities_1_1_perturbations}\index{StellaNet.stella\_net\_utilities.Perturbations@{StellaNet.stella\_net\_utilities.Perturbations}}
+
+
+Methods used to augment the model training data set and test sets.  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__utilities_1_1_perturbations_ab336b4f6dc7a7371841b64ad4567338e}{apply\+\_\+vsini}} (spectrum, vsini\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Applies vsini broadening to the provided spectrum.\+Spectrum object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__utilities_1_1_perturbations_ab7804ff31872e03aae8c20c0964efb93}{apply\+\_\+snr}} (spectrum, snr)
+\begin{DoxyCompactList}\small\item\em Applies gaussian noise to the provided spectrum.\+Spectrum object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_stella_net_1_1stella__net__utilities_1_1_perturbations_a03fd840903e178232f52d7bc72e5e1fb}{apply\+\_\+rad\+\_\+vel\+\_\+shift}} (spectrum, velocity)
+\begin{DoxyCompactList}\small\item\em Applies a radial velocity (red/blueshift) to the provided spectrum.\+Spectrum object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Methods used to augment the model training data set and test sets. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__utilities_1_1_perturbations_a03fd840903e178232f52d7bc72e5e1fb}\label{class_stella_net_1_1stella__net__utilities_1_1_perturbations_a03fd840903e178232f52d7bc72e5e1fb}} 
+\index{StellaNet.stella\_net\_utilities.Perturbations@{StellaNet.stella\_net\_utilities.Perturbations}!apply\_rad\_vel\_shift@{apply\_rad\_vel\_shift}}
+\index{apply\_rad\_vel\_shift@{apply\_rad\_vel\_shift}!StellaNet.stella\_net\_utilities.Perturbations@{StellaNet.stella\_net\_utilities.Perturbations}}
+\doxysubsubsection{\texorpdfstring{apply\_rad\_vel\_shift()}{apply\_rad\_vel\_shift()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+utilities.\+Perturbations.\+apply\+\_\+rad\+\_\+vel\+\_\+shift (\begin{DoxyParamCaption}\item[{}]{spectrum,  }\item[{}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Applies a radial velocity (red/blueshift) to the provided spectrum.\+Spectrum object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spectrum} & a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} spectrum.\+Spectrum object. See spectrum.\+Spectrum documentation for more info. \\
+\hline
+{\em velocity} & the radial velocity in km/s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the updated \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} spectrum.\+Spectrum object. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Relativistic radial velocity correction is based on\+: \href{http://spiff.rit.edu/classes/phys314/lectures/doppler/doppler.html}{\texttt{ http\+://spiff.\+rit.\+edu/classes/phys314/lectures/doppler/doppler.\+html}} 
+\end{DoxyNote}
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__utilities_1_1_perturbations_ab7804ff31872e03aae8c20c0964efb93}\label{class_stella_net_1_1stella__net__utilities_1_1_perturbations_ab7804ff31872e03aae8c20c0964efb93}} 
+\index{StellaNet.stella\_net\_utilities.Perturbations@{StellaNet.stella\_net\_utilities.Perturbations}!apply\_snr@{apply\_snr}}
+\index{apply\_snr@{apply\_snr}!StellaNet.stella\_net\_utilities.Perturbations@{StellaNet.stella\_net\_utilities.Perturbations}}
+\doxysubsubsection{\texorpdfstring{apply\_snr()}{apply\_snr()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+utilities.\+Perturbations.\+apply\+\_\+snr (\begin{DoxyParamCaption}\item[{}]{spectrum,  }\item[{}]{snr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Applies gaussian noise to the provided spectrum.\+Spectrum object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spectrum} & a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} spectrum.\+Spectrum object. See spectrum.\+Spectrum documentation for more info. \\
+\hline
+{\em snr} & The desired signal to noise ratio \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the updated \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} spectrum.\+Spectrum object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_stella_net_1_1stella__net__utilities_1_1_perturbations_ab336b4f6dc7a7371841b64ad4567338e}\label{class_stella_net_1_1stella__net__utilities_1_1_perturbations_ab336b4f6dc7a7371841b64ad4567338e}} 
+\index{StellaNet.stella\_net\_utilities.Perturbations@{StellaNet.stella\_net\_utilities.Perturbations}!apply\_vsini@{apply\_vsini}}
+\index{apply\_vsini@{apply\_vsini}!StellaNet.stella\_net\_utilities.Perturbations@{StellaNet.stella\_net\_utilities.Perturbations}}
+\doxysubsubsection{\texorpdfstring{apply\_vsini()}{apply\_vsini()}}
+{\footnotesize\ttfamily def Stella\+Net.\+stella\+\_\+net\+\_\+utilities.\+Perturbations.\+apply\+\_\+vsini (\begin{DoxyParamCaption}\item[{}]{spectrum,  }\item[{}]{vsini\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Applies vsini broadening to the provided spectrum.\+Spectrum object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spectrum} & a \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} spectrum.\+Spectrum object. \\
+\hline
+{\em vsini\+\_\+value} & The vsini that should be applied in km/s as a float value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the updated \mbox{\hyperlink{namespace_stella_net}{Stella\+Net}} spectrum.\+Spectrum object. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{class_stella_net_1_1stella__net__exceptions_1_1_wavelength_spacing_error}{stella\+\_\+net\+\_\+exceptions.\+Wavelength\+Spacing\+Error}}} & \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Adapted from i\+Spec by Sergi-\/\+Blanco Cuaresma \href{https://www.blancocuaresma.com/s/iSpec}{\texttt{ https\+://www.\+blancocuaresma.\+com/s/i\+Spec}} which was adapted from lsf\+\_\+rotate.\+pro\+: \href{http://idlastro.gsfc.nasa.gov/ftp/pro/astro/lsf_rotate.pro}{\texttt{ http\+://idlastro.\+gsfc.\+nasa.\+gov/ftp/pro/astro/lsf\+\_\+rotate.\+pro}} which was adapted from rotin3.\+f in the S\+Y\+N\+S\+P\+EC software of Hubeny \& Lanz \href{http://nova.astro.umd.edu/index.html}{\texttt{ http\+://nova.\+astro.\+umd.\+edu/index.\+html}} Also see Eq. 17.\+12 in \char`\"{}\+The Observation and Analysis of Stellar Photospheres\char`\"{} by D. Gray (1992) 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{stella__net__utilities_8py}{stella\+\_\+net\+\_\+utilities.\+py}}\end{DoxyCompactItemize}
