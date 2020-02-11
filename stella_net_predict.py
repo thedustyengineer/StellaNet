@@ -5,7 +5,7 @@ import utilities
 from keras.models import load_model
 
 
-
+## Methods used for prediction with the neural network
 class Prediction:
     ## Gets predictions for effective temperature, log g, and metallicity ([M/H])
     # @param a StellaNet spectrum.Spectrum object that the predictions will be generated for

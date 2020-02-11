@@ -30,6 +30,7 @@ from keras.models import load_model, Model
 # @param arr1 - first array
 # @param arr2 - second array
 # @return the shuffled arrays
+# @exception stella_net_exceptions.ArrayLengthMismatchError
 def shuffle_arrays(arr1, arr2):
     if (len(arr1) != len(arr2)):
         raise stella_net_exceptions.ArrayLengthMismatchError
