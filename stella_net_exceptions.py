@@ -50,4 +50,11 @@ class VsiniAlreadyAppliedError(Exception):
         logger.exception('vsini has already been applied to the spectrum')
     pass
 
+class ArrayLengthMismatchError(Exception):
+    ## Description: 
+    #   the arrays must be the same length
+    def __init__(self):
+        logger.exception('the input arrays must be the same length')
+    pass
+
 
