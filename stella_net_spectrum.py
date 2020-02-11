@@ -180,14 +180,14 @@ class Spectrum:
                         csvfile.write("{0}\t{1}\n".format(*row))
 
 
-    def PlotSpectrum(self, existing_plot=None):
+    def plot_spectrum(self, existing_plot=None):
         plt.plot(self.wavelengths, self.fluxes)
         plt.title('StellaNet Spectrum')
         plt.ylabel('Flux')
         plt.xlabel('Wavelength')
         plt.show()
 
-    def CutAndInterpolateFluxesToGrid(self, wave_count, shape=27000, replace_nan=False):
+    def cut_and_interplate_fluxes_to_grid(self, wave_count, shape=27000, replace_nan=False):
         waves = np.asarray(self.wavelengths) # the current wavelength spacing
         fluxes = np.asarray(self.fluxes) # the current fluxes
         if replace_nan:
@@ -219,18 +219,18 @@ class Spectrum:
         self.wavelengths = grid_waves
 
 
-    def MaxNormalize(self):
+    def max_normalize(self):
         self.fluxes = self.fluxes/max(self.fluxes)
 
 
     @staticmethod
-    def findIndex(array,value):
+    def find_index(array,value):
         element = min(range(len(array)), key=lambda x:abs(array[x]-value))
         return(element)
 
     # break spectrum up into segments based on knot spacing and place spline knots at those locations, then linterp the continuum from the resulting
     # cubic spline and divide by that continuum
-    def SplineNormalize(self, knot_window_spacing):
+    def spline_normalize(self, knot_window_spacing):
         waves = self.wavelengths
         fluxes = self.fluxes
         
@@ -244,10 +244,10 @@ class Spectrum:
         # initialize the first anchor window
         anchor_window = [min(waves), min(waves) + knot_window_spacing]
         while (anchor_window[1] < max(waves)):  # Find anchor position indices at the boundaries of the anchor window
-            left_index = self.findIndex(waves,anchor_window[0])
-            right_index = self.findIndex(waves,anchor_window[1])
+            left_index = self.find_index(waves,anchor_window[0])
+            right_index = self.find_index(waves,anchor_window[1])
             local_max = max(fluxes[left_index:right_index])
-            anchor_index = self.findIndex(fluxes[left_index:right_index],local_max)
+            anchor_index = self.find_index(fluxes[left_index:right_index],local_max)
             if (waves[anchor_index + left_index] not in wcont):
                 fcont.append(fluxes[anchor_index + left_index]) # must add left index because find index returns index in range left_index:right_index
                 wcont.append(waves[anchor_index + left_index])

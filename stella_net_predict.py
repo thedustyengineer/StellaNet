@@ -23,7 +23,7 @@ class Prediction:
         logg_mh_model = load_model('best_model.06-1213.08-0.20-0.09.h5') # this model is good only for log g and [M/H]
         teff_model = load_model('best_model.476-137.77-0.02-0.01.h5') # this model is good only for teff
         spec_to_predict = spectrum
-        spec_to_predict.CutAndInterpolateFluxesToGrid(27000, replace_nan=True) # the default neural network requires a shape of 1, 27000, 1
+        spec_to_predict.cut_and_interpolate_fluxes_to_grid(27000, replace_nan=True) # the default neural network requires a shape of 1, 27000, 1
         flux_values_to_predict = np.array(spec_to_predict.fluxes)
         flux_values_to_predict = flux_values_to_predict.reshape(1,27000,1)
         drop, logg, mh = logg_mh_model.predict(flux_values_to_predict) # dropped values are not used

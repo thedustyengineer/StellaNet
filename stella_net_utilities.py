@@ -311,7 +311,7 @@ class FileOperations:
         return x_train, y_train
 
     @staticmethod
-    def ApplyPerturbations(input_directory, output_directory, vsini=True, snr=True, rad_vel=True):
+    def apply_perturbations(input_directory, output_directory, vsini=True, snr=True, rad_vel=True):
         # ranges for random value generation
         vsini_value_range = range(0,300) # generates random vsini values in the specified range
         snr_value_range = range(50,250) # generates random snr values in the specified range
