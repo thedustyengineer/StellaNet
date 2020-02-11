@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['optimizer_183',['optimizer',['../namespace_stella_net_1_1stella__net__trainer.html#a6da669ff40972af16656205c15ae8535',1,'StellaNet::stella_net_trainer']]],
-  ['outout_5f3_184',['outout_3',['../namespace_stella_net_1_1stella__net__trainer.html#af14aa99f6a1abb00ece1f477059b4e51',1,'StellaNet::stella_net_trainer']]],
-  ['output_5f1_185',['output_1',['../namespace_stella_net_1_1stella__net__trainer.html#a37ca27facc27e9f97b56f6544417f955',1,'StellaNet::stella_net_trainer']]],
-  ['output_5f2_186',['output_2',['../namespace_stella_net_1_1stella__net__trainer.html#a9e8f2e39ceaeb6cdd945a128cddcad61',1,'StellaNet::stella_net_trainer']]],
-  ['output_5f3_187',['output_3',['../namespace_stella_net_1_1stella__net__trainer.html#ac96b173dfc368c9e1a1f8d637b5cd57a',1,'StellaNet::stella_net_trainer']]]
+  ['pred_5flogg_182',['pred_logg',['../namespace_stella_net_1_1stella__net__trainer.html#aebb795c42684144c4d6604ea1c5f89c4',1,'StellaNet::stella_net_trainer']]],
+  ['pred_5fmh_183',['pred_mh',['../namespace_stella_net_1_1stella__net__trainer.html#a5679beab63b733250548a670095fe61f',1,'StellaNet::stella_net_trainer']]],
+  ['pred_5fteff_184',['pred_teff',['../namespace_stella_net_1_1stella__net__trainer.html#a5823085e1b731406cdc2bfae3c39503f',1,'StellaNet::stella_net_trainer']]]
 ];

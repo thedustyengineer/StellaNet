@@ -1,24 +1,11 @@
-from numpy import mean
-from numpy import std
-from numpy import dstack
-import numpy as np
 import os; os.environ['KERAS_BACKEND'] = 'plaidml.keras.backend'
 import keras
 import utilities
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten, Reshape
-from keras.layers.convolutional import Conv1D
-from keras.layers import GlobalAveragePooling1D, AveragePooling1D
-from keras.layers.convolutional import MaxPooling1D
-from keras.utils import to_categorical
-from keras.callbacks import LambdaCallback
-from keras.utils import plot_model
 from keras.models import load_model
-from astropy.convolution import convolve, Box1DKernel
+
 
 
 class Prediction:
-
     ## Gets predictions for effective temperature, log g, and metallicity ([M/H])
     # @param a StellaNet spectrum.Spectrum object that the predictions will be generated for
     # @return a tuple of teff (K), log g (dex), [M/H] (dex)

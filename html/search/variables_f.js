@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['use_5fopt_5fparams_205',['use_opt_params',['../namespace_stella_net_1_1stella__net__predict.html#a271d0e4111a410906db53991bcb63e65',1,'StellaNet::stella_net_predict']]]
+  ['wave_196',['wave',['../namespace_stella_net_1_1normalize.html#a8c394001e23a30ee4e6f25d1b56b8274',1,'StellaNet::normalize']]],
+  ['wavelengths_197',['wavelengths',['../class_stella_net_1_1spectrum_1_1_spectrum.html#acce67ce5e461c307082df7f184633652',1,'StellaNet::spectrum::Spectrum']]]
 ];

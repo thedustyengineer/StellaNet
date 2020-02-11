@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>StellaNet: StellaNet</title>
+<title>StellaNet: StellaNet.stella_net_predict.Prediction Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('class_stella_net_1_1stella__net__predict_1_1_prediction.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -80,34 +80,66 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizab
 </iframe>
 </div>
 
-<div class="PageDoc"><div class="header">
+<div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="class_stella_net_1_1stella__net__predict_1_1_prediction-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title"><a class="el" href="namespace_stella_net.html">StellaNet</a> </div>  </div>
+<div class="title">StellaNet.stella_net_predict.Prediction Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>An artificial convolutional neural network for the visible wavelength region of stellar spectra</p>
-<p>For detailed information about this small, simple library, and an easy way to use the neural network, please visit &lt;website here&gt;</p>
-<p>Quick Notes:</p>
-<ul>
-<li>If creating your own neural networks using <a class="el" href="namespace_stella_net.html">StellaNet</a> as a starting point, it is recommended to run the effective temperature, log g, and [M/H] branches of the neural network trainer separately, since they converge at different rates. The neural network included in the package works well for visible spectra with the grid I generated (detailed description on the <a class="el" href="namespace_stella_net.html">StellaNet</a> website, some brief details below).</li>
-<li>If your data set is not perturbed enough (i.e. the synthetic spectra you use do not cover a wide variety of SNR, vsini, metallicity, individual abundances, etc.) then your neural network will be very quickly overfit. The default models have been generated as follows:</li>
-<li>Effective temperatures: [3500K - 13000K] with step size 250K</li>
-<li>log g values: [2.0 - 5.0] with step size 0.5</li>
-<li>[M/H] values: [-3.00 - 0.5] with step size 0.25</li>
-<li>SNR values: 150, 300 (random gaussian noise)</li>
-<li>vsini values: 5, 50, 100, 200, 300</li>
-<li>Atomic abundances up to Fe were generated for each individual model as being a gaussian distribution around the [M/H] value with minima and maxima +- 1 from <a href="to prevent overfitting of [M/H]">M/H</a></li>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a0d2498cc736acfe7a5a8958cc47fd49e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stella_net_1_1stella__net__predict_1_1_prediction.html#a0d2498cc736acfe7a5a8958cc47fd49e">getPredictions</a> (spectrum)</td></tr>
+<tr class="memdesc:a0d2498cc736acfe7a5a8958cc47fd49e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets predictions for effective temperature, log g, and metallicity ([M/H])  <a href="class_stella_net_1_1stella__net__predict_1_1_prediction.html#a0d2498cc736acfe7a5a8958cc47fd49e">More...</a><br /></td></tr>
+<tr class="separator:a0d2498cc736acfe7a5a8958cc47fd49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0d2498cc736acfe7a5a8958cc47fd49e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d2498cc736acfe7a5a8958cc47fd49e">&#9670;&nbsp;</a></span>getPredictions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def StellaNet.stella_net_predict.Prediction.getPredictions </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>spectrum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets predictions for effective temperature, log g, and metallicity ([M/H]) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td><a class="el" href="namespace_stella_net.html">StellaNet</a> <a class="el" href="class_stella_net_1_1spectrum_1_1_spectrum.html" title="StellaNet Spectrum object definition.">spectrum.Spectrum</a> object that the predictions will be generated for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a tuple of teff (K), log g (dex), [M/H] (dex) </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="stella__net__predict_8py.html">stella_net_predict.py</a></li>
 </ul>
-<p>This kind of distribution is recommended at a minimum to get a network that converges well for each parameter.</p>
-<p>All synthetic spectra were generated with Kurucz/Castelli's model atmospheres (<a href="http://wwwuser.oats.inaf.it/castelli/grids.html">http://wwwuser.oats.inaf.it/castelli/grids.html</a>) and the stellar spectral synthesis code used was SPECTRUM 2.76e by Richard Gray (<a href="http://www.appstate.edu/~grayro/spectrum/spectrum.html">http://www.appstate.edu/~grayro/spectrum/spectrum.html</a>)</p>
-<p>iSpec by Sergi Blanco-Cuaresma was modified to facilitate simple generation of the synthetic spectrum grid. I also referenced his code for the vsini perturbation function in <a class="el" href="namespace_stella_net.html">StellaNet</a> (which was itself derived from some older routines). I highly recommend you check out his work at <a href="https://www.blancocuaresma.com/s/iSpec">https://www.blancocuaresma.com/s/iSpec</a></p>
-<p>February 10, 2020 </p>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="namespace_stella_net.html">StellaNet</a></li><li class="navelem"><a class="el" href="namespace_stella_net_1_1stella__net__predict.html">stella_net_predict</a></li><li class="navelem"><a class="el" href="class_stella_net_1_1stella__net__predict_1_1_prediction.html">Prediction</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
