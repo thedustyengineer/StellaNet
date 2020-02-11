@@ -1,7 +1,13 @@
+## @package stella_net_predict
+# File contains StellaNet Prediction class definition
+
+# local imports
+from . import stella_net_utilities
+
+# other imports
 import numpy as np
 import os; os.environ['KERAS_BACKEND'] = 'plaidml.keras.backend'
 import keras
-import utilities
 from keras.models import load_model
 
 

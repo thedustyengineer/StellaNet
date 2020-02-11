@@ -1,4 +1,4 @@
-## @package utilities
+## @package stella_net_utilities
 # File contains Perturbation and FileOperations classes that are used to support model augmentation and training
 
 #!/usr/bin/env python
@@ -6,7 +6,7 @@
 #local imports
 from . import stella_net_config
 from . import stella_net_exceptions
-from . import spectrum
+from . import stella_net_spectrum
 
 #other imports
 import distutils
@@ -177,7 +177,7 @@ class FileOperations:
                 wave = wave[left_value_index:right_value_index]
                 flux = flux[left_value_index:right_value_index]
                 
-                new_spectrum = spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
+                new_spectrum = stella_net_spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
                 mh = filename[mh_label_index])
         else:
             if (read_range != None):
@@ -185,11 +185,9 @@ class FileOperations:
                 left_value_index = (np.abs(wave - read_range[0])).argmin()
                 right_value_index = (np.abs(wave - read_range[1])).argmin()
 
-                index_distance = right_value_index - left_value_index
-
                 wave = wave[left_value_index:right_value_index]
                 flux = flux[left_value_index:right_value_index]
-                new_spectrum = spectrum.Spectrum(wave, flux, error)
+                new_spectrum = stella_net_spectrum.Spectrum(wave, flux, error)
 
         return new_spectrum
 
@@ -235,11 +233,11 @@ class FileOperations:
         
         if parse_params:
             filename = os.path.basename(file_path).replace('.tsv','').replace('.fits','').split('_')
-            new_spectrum = spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
+            new_spectrum = stella_net_spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
                 mh = filename[mh_label_index], vsini_value = filename[vsini_label_index], noise_value = filename[snr_label_index], \
                 radial_velocity_shift = filename[rad_vel_label_index])
         else:
-            new_spectrum = spectrum.Spectrum(wave, flux, error)
+            new_spectrum = stella_net_spectrum.Spectrum(wave, flux, error)
 
         return new_spectrum
 
@@ -317,7 +315,7 @@ class FileOperations:
         # ranges for random value generation
         vsini_value_range = range(0,300) # generates random vsini values in the specified range
         snr_value_range = range(50,250) # generates random snr values in the specified range
-        rad_vel_value_range = range(-20,20) # generates random rad_vel values in the specified range
+        # rad_vel_value_range = range(-20,20) # generates random rad_vel values in the specified range
 
         # counts for random value generation
         num_rand_vsini = 10 # get 10 random values

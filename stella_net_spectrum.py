@@ -1,12 +1,14 @@
-## @package spectrum
-# File contains StellaNet format spectrum class definition
+## @package stella_net_spectrum
+# File contains StellaNet format Spectrum class definition
 
+# local imports
+from . import stella_net_config
+from . import stella_net_exceptions
 
+# other imports
 import distutils
 import os
 import logging
-import stella_net_config
-import stella_net_exceptions
 import numpy as np
 from scipy.signal import fftconvolve
 from astropy.io import fits # DOCUMENTATION HERE: http://docs.astropy.org/en/stable/io/fits/
@@ -71,8 +73,6 @@ class Spectrum:
                 next_wavelength = self.wavelengths[wave_index + 1]
                 if not ((next_wavelength - current_wavelength) == (current_wavelength - previous_wavelength)):
                     raise stella_net_exceptions.WavelengthSpacingError
-            else:
-                deltav = current_wavelength - previous_wavelength
         
         epsilon = 0.6
 
@@ -89,8 +89,6 @@ class Spectrum:
 
         # The wavelength grid
         k = np.abs(np.arange(n)- np.floor(n/2))
-
-        kernel_x = (np.arange(n)-np.floor(n/2))*dx
 
         # Useful constants
         dx2 = dx**2.
