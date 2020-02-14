@@ -128,8 +128,11 @@ class FileOperations:
     # @param is_feros: indicates if the passed fits spectrum file is a FEROS file (in which case the wave, flux, and error
     # arrays are all [[]] arrays and need to be converted to [])
     # @return a StellaNet spectrum.Spectrum object generated from the file that was read
+    # @note
+    #   FEROS and HARPS .fits files require the headers to be set to 'WAVE', 'FLUX', 'ERR'
+    #   and for the caller to set is_feros=True
     @staticmethod
-    def read_fits_spectrum(file_path, table_num, wave_header, flux_header, error_header, parse_params = False, read_range=None, is_feros=False):
+    def read_fits_spectrum(file_path, table_num, wave_header=None, flux_header=None, error_header=None, parse_params = False, read_range=None, is_feros=False):
         logger.info('Reading file at' + file_path)
 
         # the iSpec naming convention label indices
@@ -139,17 +142,17 @@ class FileOperations:
 
         hdul = fits.open(file_path)          # open the current fits file
     
-        if (flux_header != '0'):
+        if (flux_header != None):
             flux = np.array(hdul[table_num].data[flux_header])   # the flux
         else:
             flux = np.array(hdul[table_num].data)
 
-        if (error_header != '0'):
+        if (error_header != None):
             error = np.array(hdul[table_num].data[error_header])
         else:
             error = np.zeros_like(flux)
 
-        if (wave_header != '0'):
+        if (wave_header != None):
             wave = np.array(hdul[table_num].data[wave_header])
         else:
             pix_size = hdul[table_num].header['CRPIX1']
@@ -164,6 +167,9 @@ class FileOperations:
             flux = flux[0]
             error = error[0]
 
+        # if the spectrum is in A convert to nm - this assumes the spectrum is visible wavelength range
+        # you'll need to disable this if you create your own IR range neural network
+        # and use this library for perturbations etc
         if min(wave) > 1000:
                 wave = wave/10.0
 
