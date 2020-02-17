@@ -1,7 +1,7 @@
 ## @package stella_net_exceptions
 # File contains StellaNet custom exception definitions
 
-from . import stella_net_config
+import stella_net_config
 import logging
 
 # setup

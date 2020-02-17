@@ -4,9 +4,9 @@
 #!/usr/bin/env python
 
 #local imports
-from . import stella_net_config
-from . import stella_net_exceptions
-from . import stella_net_spectrum
+import stella_net_config
+import stella_net_exceptions
+import stella_net_spectrum
 
 #other imports
 import distutils
@@ -185,6 +185,8 @@ class FileOperations:
                 
                 new_spectrum = stella_net_spectrum.Spectrum(wave, flux, error, teff = filename[teff_label_index], logg = filename[logg_label_index], \
                 mh = filename[mh_label_index])
+            else:
+                new_spectrum = stella_net_spectrum.Spectrum(wave,flux,error)
         else:
             if (read_range != None):
                 # find left and right boundary indices
@@ -194,6 +196,8 @@ class FileOperations:
                 wave = wave[left_value_index:right_value_index]
                 flux = flux[left_value_index:right_value_index]
                 new_spectrum = stella_net_spectrum.Spectrum(wave, flux, error)
+            else:
+                new_spectrum = stella_net_spectrum.Spectrum(wave,flux,error)
 
         return new_spectrum
 
@@ -282,21 +286,27 @@ class FileOperations:
     # @return x_train, y_train tuple (both numpy arrays) where x_train is the flux values 
     # and y_train is the data labels
     @staticmethod
-    def build_dataset_from_grid_folder(directory, label_index, save_npy_binary_file=False):
+    def build_dataset_from_grid_folder(directory, label_index, save_npy_binary_file=False, vsini=False):
         x_train = []
         y_train = []
+        file_num = 0 # initialize current file number
+        file_count = len([name for name in os.listdir(directory) if (os.path.isfile(directory + '/' + name) and ('.fits' in name or '.tsv' in name))])
+
         for file in os.listdir(directory):
+            current_percent = (file_num/file_count) * 100
             if '.fits' in file:
-                logger.info('Adding file: ' + file)
-                this_spectrum = FileOperations.read_fits_spectrum(directory + '/' + file,0,'0','0','0')
+                logger.info(str(int(current_percent)) + '%' + ' -- ' + 'File ' + str(file_num) + ' of ' + str(file_count) + ':' + file)
+                this_spectrum = FileOperations.read_fits_spectrum(directory + '/' + file,0)
                 x_train.append(this_spectrum.fluxes)
                 filename = file.split('_')
-                y_train.append([float(filename[0]),float(filename[1]),float(filename[2])])
+                y_train.append([float(filename[0]),float(filename[1]),float(filename[2]),float(filename[6])])
+                file_num+=1
             if ('.tsv' in file) and not ('._' in file):
-                logger.info('Adding file: ' + file)
+                logger.info(str(int(current_percent)) + '%' + ' -- ' + 'File ' + str(file_num) + ' of ' + str(file_count) + ':' + file)
                 this_spectrum = FileOperations.read_tsv_spectrum(directory + '/' + file, parse_params=True)
                 x_train.append(this_spectrum.fluxes)
-                y_train.append([float(this_spectrum.teff), float(this_spectrum.logg), float(this_spectrum.mh)])
+                y_train.append([float(this_spectrum.teff), float(this_spectrum.logg), float(this_spectrum.mh), float(this_spectrum.vsini_value)])
+                file_num+=1
 
         # save the .npy binary files for fast loading later
         if save_npy_binary_file:
@@ -316,36 +326,61 @@ class FileOperations:
         y_train = np.load(y_train_path)
         return x_train, y_train
 
+    ## Apply perturbations to a training grid to augment the grid
+    # @param input_directory: the path to the grid you want to augment with perturbations
+    # @param output_directory: the path where the augmented grid will be saved
+    # @param vsini: apply vsini perturbations (default True)
+    # @param snr: apply snr perturbations (default True)
+    # @param rad_vel: apply rad_vel perturbations (default False), not necessary for convolution networks
+    # @param use_random_perturbations: applies random perturbations in the range specified in the method instead of fixed perturbation values (default False)
+    # @param output_wavelengths: specify wavelengths to cut the input grid files to (i.e. [400,525]) (default None)
+    # @param normalize: apply stella_net_spectrum.Spectrum.normalize(normalize_spacing)
+    # @param normalize_spacing: the spacing to use for normalization if normalize=True (default 2)
     @staticmethod
-    def apply_perturbations(input_directory, output_directory, vsini=True, snr=True, rad_vel=True):
-        # ranges for random value generation
-        vsini_value_range = range(0,300) # generates random vsini values in the specified range
-        snr_value_range = range(50,250) # generates random snr values in the specified range
-        # rad_vel_value_range = range(-20,20) # generates random rad_vel values in the specified range
+    def apply_perturbations(input_directory, output_directory, vsini=True, snr=True, rad_vel=False, use_random_perturbations=False, output_wavelengths=None, normalize=True, normalize_spacing=2):
+        if use_random_perturbations:
+            # ranges for random value generation
+            vsini_value_range = range(0,300) # generates random vsini values in the specified range
+            snr_value_range = range(50,200) # generates random snr values in the specified range
+            #rad_vel_value_range = range(-20,20) # generates random rad_vel values in the specified range
 
-        # counts for random value generation
-        num_rand_vsini = 10 # get 10 random values
-        num_rand_snr = 10
-        #num_rand_rad_vel = 1 don't need random rad_vel for convolutional networks
+            # counts for random value generation
+            num_rand_vsini = 10 # get 10 random values
+            num_rand_snr = 10
+            #num_rand_rad_vel = 1 # don't need random rad_vel for convolutional networks
 
-        # random value generation
-        vsini_values = random.sample(vsini_value_range, num_rand_vsini) # you can manually specify like [5,25,50,100,200] if you prefer
-        snr_values = random.sample(snr_value_range, num_rand_snr)
-        #rad_vel_values = random.sample(rad_vel_value_range, num_rand_rad_vel)
+            # random value generation
+            vsini_values = random.sample(vsini_value_range, num_rand_vsini) # you can manually specify like [5,25,50,100,200] if you prefer
+            snr_values = random.sample(snr_value_range, num_rand_snr)
+            #rad_vel_values = random.sample(rad_vel_value_range, num_rand_rad_vel)
 
+        else:
+            vsini_values = [10,20,50,75,100,150,200]
+            snr_values = [50,100,150,200]
+            #rad_vel_values = [-10, -5, -3, 0, 3, 5, 10]
 
+        file_num = 0 # initialize current file number
+        file_count = len([name for name in os.listdir(input_directory) if (os.path.isfile(input_directory + '/' + name) and ('.fits' in name or '.tsv' in name))])
         for file in os.listdir(input_directory):
 
+            current_percent = (file_num/file_count) * 100
+
             isGridFile = False
+
             # load fits
             if '.fits' in file:
-                logger.info('Adding file: ' + file)
-                raw_spectrum = FileOperations.read_fits_spectrum(input_directory + '/' + file,0,'0','0','0', parse_params=True)
+                logger.info(str(int(current_percent)) + '%' + ' -- ' + 'File ' + str(file_num) + ' of ' + str(file_count) + ':' + file)
+                raw_spectrum = FileOperations.read_fits_spectrum(input_directory + '/' + file, 0, parse_params=True, read_range=output_wavelengths)
+                if normalize:
+                    raw_spectrum.normalize(normalize_spacing)
                 isGridFile = True
+
             # load tsv
             if '.tsv' in file:
-                logger.info('Adding file: ' + file)
-                raw_spectrum = FileOperations.read_tsv_spectrum(input_directory + '/' + file, parse_params=True, read_range=[350,600])
+                logger.info(str(int(current_percent)) + '%' + ' -- ' + 'File ' + str(file_num) + ' of ' + str(file_count) + ':' + file)
+                raw_spectrum = FileOperations.read_tsv_spectrum(input_directory + '/' + file, parse_params=True, read_range=output_wavelengths)
+                if normalize:
+                    raw_spectrum.normalize(normalize_spacing)
                 isGridFile = True
 
             if isGridFile:
@@ -353,9 +388,13 @@ class FileOperations:
                     #for rad_vel_value in rad_vel_values:
                         for snr_value in snr_values:
                             this_spectrum = copy.deepcopy(raw_spectrum) # deep copy so that we don't apply overlapping operations
-                            this_spectrum.apply_vsini(vsini_value)
-                            #this_spectrum.apply_rad_vel_shift(rad_vel_value)
-                            this_spectrum.apply_snr(snr_value)
+                            if vsini:
+                                this_spectrum.apply_vsini(vsini_value)
+                            #if rad_vel:
+                                #this_spectrum.apply_rad_vel_shift(rad_vel_value)
+                            if snr:
+                                this_spectrum.apply_snr(snr_value)
                             this_spectrum.write_column_spectrum(output_directory, use_opt_params=True)
+            file_num+=1
 
-                            
+#FileOperations.apply_perturbations('/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/grid','/Volumes/Storage/nn_R55kA_FG42kA_grid_spectrum/perturbed_400-525nm_normalized', output_wavelengths=[400,525])

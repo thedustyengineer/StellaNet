@@ -2,8 +2,8 @@
 # File contains StellaNet format Spectrum class definition
 
 # local imports
-from . import stella_net_config
-from . import stella_net_exceptions
+import stella_net_config
+import stella_net_exceptions
 
 # other imports
 import distutils
@@ -17,7 +17,9 @@ import csv
 import math
 from operator import itemgetter
 import matplotlib.pyplot as plt
+from astropy.convolution import convolve, Box1DKernel
 from scipy.interpolate import splrep,splev
+
 
 logger = logging.getLogger('stella_net')
 
@@ -39,7 +41,8 @@ class Spectrum:
     # @param is_synthetic: (default: True) bool indicating if the spectrum is synthetic or not
     # @param snr: The desired signal to noise ratio
     def __init__(self, wavelengths, fluxes, errors, vsini_applied = False, vsini_value = 0, \
-    noise_applied = False, noise_value = 0, radial_velocity_shift_applied = False, radial_velocity_shift = 0, is_synthetic = True, teff = None, mh = None, logg = None):
+    noise_applied = False, noise_value = 0, radial_velocity_shift_applied = False, radial_velocity_shift = 0, is_synthetic = True, teff = None, mh = None, logg = None, \
+        continuum=None, wcont=None, fcont=None):
     
         self.wavelengths = wavelengths
         self.fluxes = fluxes
@@ -53,11 +56,14 @@ class Spectrum:
         self.rad_vel_value = radial_velocity_shift
         self.vsini_applied = False
         self.vsini_value = vsini_value
+        self.continuum = continuum
+        self.wcont = wcont
+        self.fcont = fcont
         
 
     def apply_vsini(self, vsini_value):
         
-        logger.info('applying vsini perturbation with value {}'.format(vsini_value))
+        logger.info('Applying vsini perturbation with value {}'.format(vsini_value))
 
         if (vsini_value <= 0): # can't apply a 0 or negative vsini
             raise stella_net_exceptions.ParamTooSmallError
@@ -131,7 +137,7 @@ class Spectrum:
 
 
     def apply_snr(self, snr):
-        
+        logger.info('Applying snr perturbation with value {}'.format(snr))
         if self.noise_applied:
             raise stella_net_exceptions.NoiseAlreadyAppliedError
 
@@ -145,7 +151,7 @@ class Spectrum:
             
 
     def apply_rad_vel_shift(self, velocity):
-
+        logger.info('Applying rad vel shift perturbation with value {}'.format(velocity))
         if self.radial_velocity_shift_applied:
             raise stella_net_exceptions.RadVelAlreadyAppliedError
 
@@ -171,23 +177,29 @@ class Spectrum:
         if self.errors is not None:
             with open(directory + '/' + filename,"a") as csvfile:
                     rows = zip(np.round(self.wavelengths,6), np.round(self.fluxes,3), np.round(self.errors,3))
+                    logger.info('Writing file ' + filename)
                     for row in rows:
                         csvfile.write("{0}\t{1}\t{2}\n".format(*row))
         else:
             with open(directory + '/' + filename,"a") as csvfile:
                     rows = zip(np.round(self.wavelengths,6), np.round(self.fluxes,3))
+                    logger.info('Writing file ' + filename)
                     for row in rows:
                         csvfile.write("{0}\t{1}\n".format(*row))
 
 
-    def plot_spectrum(self, existing_plot=None):
+    def plot_spectrum(self, plot_continuum=False):
+        if plot_continuum:
+            plt.plot(self.wcont,self.fcont, 'bo')
+            plt.plot(self.wavelengths, self.continuum)
+
         plt.plot(self.wavelengths, self.fluxes)
         plt.title('StellaNet Spectrum')
         plt.ylabel('Flux')
         plt.xlabel('Wavelength')
         plt.show()
 
-    def cut_and_interplate_fluxes_to_grid(self, wave_count, shape=27000, replace_nan=False):
+    def cut_and_interpolate_fluxes_to_grid(self, shape, replace_nan=False, wavelengths=None):
         waves = np.asarray(self.wavelengths) # the current wavelength spacing
         fluxes = np.asarray(self.fluxes) # the current fluxes
         if replace_nan:
@@ -198,6 +210,14 @@ class Spectrum:
 
         if (min(waves) > 1000): # check if in A or nm
             waves = waves/10 # convert to nm
+
+        if wavelengths != None:
+            # find left and right boundary indices
+            left_value_index = (np.abs(waves - wavelengths[0])).argmin()
+            right_value_index = (np.abs(waves - wavelengths[1])).argmin()
+
+            waves = waves[left_value_index:right_value_index]
+            fluxes = fluxes[left_value_index:right_value_index]
 
         min_wave = min(waves)
         max_wave = max(waves)
@@ -222,6 +242,8 @@ class Spectrum:
     def max_normalize(self):
         self.fluxes = self.fluxes/max(self.fluxes)
 
+    def boxcar_smooth(self, points):
+         self.fluxes = convolve(self.fluxes, Box1DKernel(points))
 
     @staticmethod
     def find_index(array,value):
@@ -230,47 +252,67 @@ class Spectrum:
 
     # break spectrum up into segments based on knot spacing and place spline knots at those locations, then linterp the continuum from the resulting
     # cubic spline and divide by that continuum
-    def spline_normalize(self, knot_window_spacing):
+    def normalize(self, knot_window_spacing, show_plot=False):
         waves = self.wavelengths
-        fluxes = self.fluxes
+        fluxes_for_cont = self.fluxes
         
-
-       
         # Initialize arrays that will hold the x and y values of the continuum
         wcont=[]
         fcont=[]
 
+        h_regions = [(653,661), (481,491), (428,441), (406,415)]
+
+        for idx, flux in enumerate(fluxes_for_cont):
+            if not np.isnan(flux) and not flux == 'nan':
+                last_non_nan = flux
+            else:
+                print('fixing nan in normalize')
+                fluxes_for_cont[idx] = last_non_nan
+
+        # box car smooth the flux by a lot to (mostly) eliminate the effects of noise
+        fluxes_for_cont = convolve(fluxes_for_cont, Box1DKernel(50))
+
+      
 
         # initialize the first anchor window
         anchor_window = [min(waves), min(waves) + knot_window_spacing]
-        while (anchor_window[1] < max(waves)):  # Find anchor position indices at the boundaries of the anchor window
+        while (anchor_window[1] <= max(waves)):  # Find anchor position indices at the boundaries of the anchor window
             left_index = self.find_index(waves,anchor_window[0])
             right_index = self.find_index(waves,anchor_window[1])
-            local_max = max(fluxes[left_index:right_index])
-            anchor_index = self.find_index(fluxes[left_index:right_index],local_max)
-            if (waves[anchor_index + left_index] not in wcont):
-                fcont.append(fluxes[anchor_index + left_index]) # must add left index because find index returns index in range left_index:right_index
-                wcont.append(waves[anchor_index + left_index])
+            local_max = max(fluxes_for_cont[left_index:right_index])
+            anchor_index = self.find_index(fluxes_for_cont[left_index:right_index], local_max)
+            wcont_maybe = waves[anchor_index + left_index]
+            if (wcont_maybe not in wcont) and not any(lower <= wcont_maybe <= upper for (lower, upper) in h_regions):
+                fcont.append(local_max)
+                wcont.append(wcont_maybe)
+            else:
+                if anchor_window[0] == min(waves): # handle the case where our local_max happened to be in the first balmer line region
+                    local_max = local_max = max(fluxes_for_cont[left_index:right_index/2])
+                    anchor_index = self.find_index(fluxes_for_cont[left_index:right_index], local_max)
+                    wcont_maybe = waves[anchor_index + left_index]
+                    fcont.append(local_max)
+                    wcont.append(wcont_maybe)
             anchor_window  = [anchor_window[0] + knot_window_spacing, anchor_window[1] + knot_window_spacing]
-
-        # add a point to the beginning and end of wcont so that the full wavelength range is covered
-        #np.insert(wcont, 0, min(waves))
-        #np.insert(fcont, 0, max(fluxes[0:20])) # set the first flux cont value to be the max on the left side of fluxes 
-        #np.append(wcont, max(waves))
-        #np.append(fcont, max(fluxes[fluxes.size-20:fluxes.size-1]))
-        # Perform a spline fit on the anchor points to smooth out the continuum
-        # spl = UnivariateSpline(wcont,fcont,s=0.8)
-
-        # interpolate the continuum to match the wavelengths of the observed spectrum
-        #fluxcont = np.interp(waves, wcont, fcont)
+        #if any(lower <= wcont_maybe <= upper for (lower, upper) in h_regions):
+        fcont.append(fluxes_for_cont[len(waves)-50])
+        wcont.append(waves[len(waves)-50])
         
-        spl = splrep(wcont,fcont,k=3)
-        continuum = splev(waves,spl)
+        spline = splrep(wcont,fcont,k=3)
+        spline_continuum = splev(self.wavelengths,spline)
 
-        self.fluxes = self.fluxes/continuum
-        for flux in self.fluxes:
-            if (np.isnan(flux) or flux == 'nan'):
-                print('fixing nan')
-                flux = 1.0
+        self.wcont = wcont
+        self.fcont = fcont
+        self.continuum = spline_continuum
+
+        if show_plot:
+            self.plot_spectrum(plot_continuum=True)
+
+        self.fluxes = self.fluxes/spline_continuum
+
+        
+
+        return wcont, fcont, spline_continuum
+
+        
 
        
