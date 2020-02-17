@@ -20,14 +20,13 @@ import matplotlib.pyplot as plt
 from astropy.convolution import convolve, Box1DKernel
 from scipy.interpolate import splrep,splev
 
-
+# set up logging
 logger = logging.getLogger('stella_net')
 
 ## StellaNet Spectrum object definition
 class Spectrum:
    
     ## Object representing a stellar spectrum (or synthetic spectrum) and all of its associated parameters
-    #
     # @param self: the object instance
     # @param wavelengths: the spectrum wavelength values in Angstroms
     # @param fluxes: the normalized spectrum flux values
@@ -38,11 +37,17 @@ class Spectrum:
     # @param noise_value: (default: 0) int indicating the SNR
     # @param radial_velocity_shift_applied: (default: False) bool indicating if the spectrum has been red or blue shifted
     # @param radial_velocity_shift: (default: 0) a float indicating the radial velocity shift applied to the spectrum in km/s
-    # @param is_synthetic: (default: True) bool indicating if the spectrum is synthetic or not
-    # @param snr: The desired signal to noise ratio
+    # @param is_synthetic: (default: None) bool indicating if the spectrum is synthetic or not
+    # @param teff: (default: None) the effective temperature
+    # @param mh: (default: None) the metallicity
+    # @param logg: (default: None) the log g
+    # @param continuum: (default: None) the continuum array
+    # @param wcont: (default: None) the wavelengths used for the continuum
+    # @param fcont: (default: None) the fluxes used for the continuum
     def __init__(self, wavelengths, fluxes, errors, vsini_applied = False, vsini_value = 0, \
-    noise_applied = False, noise_value = 0, radial_velocity_shift_applied = False, radial_velocity_shift = 0, is_synthetic = True, teff = None, mh = None, logg = None, \
-        continuum=None, wcont=None, fcont=None):
+                noise_applied = False, noise_value = 0, radial_velocity_shift_applied = False, \
+                radial_velocity_shift = 0, is_synthetic = None, teff = None, mh = None, logg = None, \
+                continuum=None, wcont=None, fcont=None):
     
         self.wavelengths = wavelengths
         self.fluxes = fluxes
@@ -60,7 +65,19 @@ class Spectrum:
         self.wcont = wcont
         self.fcont = fcont
         
-
+    ## Applies vsini broadening to the spectrum
+    # @param vsini_value: The vsini that should be applied in km/s as a float value
+    # @exception stella_net_exceptions.WavelengthSpacingError
+    # @exception stella_net_exceptions.ParamTooSmallError
+    # @exception stella_net_exceptions.VsiniAlreadyAppliedError
+    # @note
+    #   Adapted from iSpec by Sergi-Blanco Cuaresma https://www.blancocuaresma.com/s/iSpec
+    #   which was adapted
+    #   from lsf_rotate.pro:
+    #   http://idlastro.gsfc.nasa.gov/ftp/pro/astro/lsf_rotate.pro
+    #   which was adapted from rotin3.f in the SYNSPEC software of Hubeny & Lanz
+    #   http://nova.astro.umd.edu/index.html     Also see Eq. 17.12 in
+    #   "The Observation and Analysis of Stellar Photospheres" by D. Gray (1992)
     def apply_vsini(self, vsini_value):
         
         logger.info('Applying vsini perturbation with value {}'.format(vsini_value))
@@ -135,12 +152,12 @@ class Spectrum:
         self.vsini_applied = True
         self.vsini_value = vsini_value
 
-
+    ## Applies gaussian noise to the spectrum
+    # @param snr: The desired signal to noise ratio
     def apply_snr(self, snr):
         logger.info('Applying snr perturbation with value {}'.format(snr))
         if self.noise_applied:
             raise stella_net_exceptions.NoiseAlreadyAppliedError
-
         self.fluxes= self.fluxes/max(self.fluxes) + \
             np.random.normal(size=len(self.fluxes),scale=1.00/float(snr))
         self.noise_applied = True
@@ -149,7 +166,12 @@ class Spectrum:
         self.noise_value = snr
         
             
-
+    ## Applies a radial velocity (red/blueshift) to the spectrum
+    # @param velocity: the radial velocity in km/s
+    # @exception stella_net_exceptions.RadVelAlreadyAppliedError
+    # @note
+    # Relativistic radial velocity correction is based on:
+    # http://spiff.rit.edu/classes/phys314/lectures/doppler/doppler.html
     def apply_rad_vel_shift(self, velocity):
         logger.info('Applying rad vel shift perturbation with value {}'.format(velocity))
         if self.radial_velocity_shift_applied:
@@ -162,6 +184,10 @@ class Spectrum:
         self.radial_velocity_shift_applied = True
         self.rad_vel_value = velocity/1000.
 
+    ## Writes the spectrum to a tab separated value (.tsv) file
+    # @param directory: the directory to write to
+    # @param filename: the output filename, if none specified parameters will be used for the name (default: None) 
+    # @param use_opt_params: if True will use vsini, snr, and rad vel in the filename in addition to teff, logg, and [M/H]
     def write_column_spectrum(self, directory, filename=None, use_opt_params=False):
         
         # make the directory if it doesn't exist
@@ -187,8 +213,11 @@ class Spectrum:
                     for row in rows:
                         csvfile.write("{0}\t{1}\n".format(*row))
 
-
-    def plot_spectrum(self, plot_continuum=False):
+    ## Plots the spectrum
+    # @param plot_continuum: True if the continuum should also be plotted
+    # @param plot_to_file: a path to save the plot to as a .png. If specified, the plot
+    # will not be displayed, only saved to file (default: None)
+    def plot_spectrum(self, plot_continuum=False, plot_to_file=None):
         if plot_continuum:
             plt.plot(self.wcont,self.fcont, 'bo')
             plt.plot(self.wavelengths, self.continuum)
@@ -197,9 +226,17 @@ class Spectrum:
         plt.title('StellaNet Spectrum')
         plt.ylabel('Flux')
         plt.xlabel('Wavelength')
-        plt.show()
+        if plot_to_file != None:
+            plt.savefig(plot_to_file)
+            plt.close()
+        else:
+            plt.show()
 
-    def cut_and_interpolate_fluxes_to_grid(self, shape, replace_nan=False, wavelengths=None):
+    ## Interpolates fluxes to the desired shape and, optionally, cuts the spectrum to specified wavelengths
+    # @param shape: The number of points required by the model (can be calculated as [max(wave)-min(wave)]/wavelength spacing)
+    # @param replace_nan: True to replace NaN values in the spectrum fluxes (default True)
+    # @param wavelengths: If not None, the min and max wavelengths to cut the spectrum to (i.e. [400,525]) (default None)
+    def cut_and_interpolate_fluxes_to_grid(self, shape, replace_nan=True, wavelengths=None):
         waves = np.asarray(self.wavelengths) # the current wavelength spacing
         fluxes = np.asarray(self.fluxes) # the current fluxes
         if replace_nan:
@@ -222,36 +259,33 @@ class Spectrum:
         min_wave = min(waves)
         max_wave = max(waves)
 
-        #waves.argmax(waves<300)
-        #print()
-        
         grid_waves = np.linspace(min_wave, max_wave, shape) # the ideal wavelength spacing
         fluxterp = np.interp(grid_waves, waves, fluxes) # calculate the interpolated fluxes
-        #vals_before = int((min_wave-300)/0.01) + 1 # the number of ones to pad with at the beginning of the array
-        #vals_after = int((700-max_wave)/0.01) # the number of ones to pad with at the end of the array
-        #dont_pad = False
-        #if (vals_before < 0): vals_before = 0
-        #if (vals_after < 0): vals_after = 0
-        #if ((min_wave < 300) or (max_wave < 700)):
-            #grid_waves = np.pad(grid_waves, (vals_before, vals_after), mode='constant', constant_values = (0,0))
-            #fluxterp = np.pad(fluxterp, (vals_before, vals_after), mode='constant', constant_values = (0,0))
+       
         self.fluxes = fluxterp
         self.wavelengths = grid_waves
 
-
+    ## Normalizes the spectrum by dividing by the maximum flux value
     def max_normalize(self):
         self.fluxes = self.fluxes/max(self.fluxes)
 
+    ## Smooths the spectrum using a boxcar convolution
+    # @param points: the number of points to smooth by
     def boxcar_smooth(self, points):
          self.fluxes = convolve(self.fluxes, Box1DKernel(points))
 
+    ## Finds the index of the specified value in an array
+    # @param array: the array to find the value for
+    # @param value: the value to find
+    # @return index: the index of the value in the array
     @staticmethod
     def find_index(array,value):
         element = min(range(len(array)), key=lambda x:abs(array[x]-value))
         return(element)
 
-    # break spectrum up into segments based on knot spacing and place spline knots at those locations, then linterp the continuum from the resulting
-    # cubic spline and divide by that continuum
+    ## Normalizes the spectrum using a cubic spline fit over local maxima in a sliding window
+    # @param knot_window_spacing: the window spacing (i.e. if 5, place a knot at the maxima of each 5 nm window)
+    # @param show_plot: show the plot after normalizing (default False)
     def normalize(self, knot_window_spacing, show_plot=False):
         waves = self.wavelengths
         fluxes_for_cont = self.fluxes
@@ -271,8 +305,6 @@ class Spectrum:
 
         # box car smooth the flux by a lot to (mostly) eliminate the effects of noise
         fluxes_for_cont = convolve(fluxes_for_cont, Box1DKernel(50))
-
-      
 
         # initialize the first anchor window
         anchor_window = [min(waves), min(waves) + knot_window_spacing]
@@ -308,8 +340,6 @@ class Spectrum:
             self.plot_spectrum(plot_continuum=True)
 
         self.fluxes = self.fluxes/spline_continuum
-
-        
 
         return wcont, fcont, spline_continuum
 

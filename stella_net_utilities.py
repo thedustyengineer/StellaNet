@@ -132,7 +132,8 @@ class FileOperations:
     #   FEROS and HARPS .fits files require the headers to be set to 'WAVE', 'FLUX', 'ERR'
     #   and for the caller to set is_feros=True
     @staticmethod
-    def read_fits_spectrum(file_path, table_num, wave_header=None, flux_header=None, error_header=None, parse_params = False, read_range=None, is_feros=False):
+    def read_fits_spectrum(file_path, table_num, wave_header=None, flux_header=None, error_header=None, parse_params = False, \
+        read_range=None, is_feros=False):
         logger.info('Reading file at' + file_path)
 
         # the iSpec naming convention label indices
@@ -286,7 +287,7 @@ class FileOperations:
     # @return x_train, y_train tuple (both numpy arrays) where x_train is the flux values 
     # and y_train is the data labels
     @staticmethod
-    def build_dataset_from_grid_folder(directory, label_index, save_npy_binary_file=False, vsini=False):
+    def build_dataset_from_grid_folder(directory, label_index, save_npy_binary_file=False):
         x_train = []
         y_train = []
         file_num = 0 # initialize current file number
@@ -299,13 +300,13 @@ class FileOperations:
                 this_spectrum = FileOperations.read_fits_spectrum(directory + '/' + file,0)
                 x_train.append(this_spectrum.fluxes)
                 filename = file.split('_')
-                y_train.append([float(filename[0]),float(filename[1]),float(filename[2]),float(filename[6])])
+                y_train.append([float(filename[0]),float(filename[1]),float(filename[2]))
                 file_num+=1
             if ('.tsv' in file) and not ('._' in file):
                 logger.info(str(int(current_percent)) + '%' + ' -- ' + 'File ' + str(file_num) + ' of ' + str(file_count) + ':' + file)
                 this_spectrum = FileOperations.read_tsv_spectrum(directory + '/' + file, parse_params=True)
                 x_train.append(this_spectrum.fluxes)
-                y_train.append([float(this_spectrum.teff), float(this_spectrum.logg), float(this_spectrum.mh), float(this_spectrum.vsini_value)])
+                y_train.append([float(this_spectrum.teff), float(this_spectrum.logg), float(this_spectrum.mh)])
                 file_num+=1
 
         # save the .npy binary files for fast loading later
@@ -337,7 +338,8 @@ class FileOperations:
     # @param normalize: apply stella_net_spectrum.Spectrum.normalize(normalize_spacing)
     # @param normalize_spacing: the spacing to use for normalization if normalize=True (default 2)
     @staticmethod
-    def apply_perturbations(input_directory, output_directory, vsini=True, snr=True, rad_vel=False, use_random_perturbations=False, output_wavelengths=None, normalize=True, normalize_spacing=2):
+    def apply_perturbations(input_directory, output_directory, vsini=True, snr=True, rad_vel=False, \
+        use_random_perturbations=False, output_wavelengths=None, normalize=True, normalize_spacing=2):
         if use_random_perturbations:
             # ranges for random value generation
             vsini_value_range = range(0,300) # generates random vsini values in the specified range
