@@ -300,7 +300,7 @@ class FileOperations:
                 this_spectrum = FileOperations.read_fits_spectrum(directory + '/' + file,0)
                 x_train.append(this_spectrum.fluxes)
                 filename = file.split('_')
-                y_train.append([float(filename[0]),float(filename[1]),float(filename[2]))
+                y_train.append([float(filename[0]),float(filename[1]),float(filename[2])])
                 file_num+=1
             if ('.tsv' in file) and not ('._' in file):
                 logger.info(str(int(current_percent)) + '%' + ' -- ' + 'File ' + str(file_num) + ' of ' + str(file_count) + ':' + file)
