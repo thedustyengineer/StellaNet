@@ -56,9 +56,9 @@ input_shape = num_points * num_columns
 
 
 BATCH_SIZE = 64 # if you reduce batch size to 32 or 16 make sure to adjust epochs as necessary
-EPOCHS = 50  # ~50 is enough for log g, [M/H] (might even be overfit depending on how you tune hyperparameters)
-             # for Teff usually ~300 epochs is plenty to achieve convergence without overfitting
-             # you can train once by running for ~300 epochs and then use an later model for the teff
+EPOCHS = 50  # ~10 is enough for log g, [M/H] (might even be overfit depending on how you tune hyperparameters)
+             # for Teff usually < 500 epochs is plenty to achieve convergence without overfitting
+             # you can train once by running for 500 epochs and then use an later model for the teff
              # and an earlier model for log g and [M/H]
 
 # the teff branch
@@ -130,6 +130,10 @@ history = model.fit(x_train, # x-train contains data, y-train contains labels
 ###
 # Plot training & validation accuracy values
 ###
+
+plt.ioff()
+
+figure_teff = plt.figure()
 plt.plot(history.history['predicted_teff_loss'])
 plt.plot(history.history['val_predicted_teff_loss'])
 plt.title('Model Loss')
@@ -137,8 +141,9 @@ plt.ylabel('Model Loss')
 plt.xlabel('Epoch')
 plt.legend(['Teff (Train)', 'Teff (Test)'], loc='upper left')
 plt.savefig('teff')
+plt.close(figure_teff)
 
-
+figure_mh = plt.figure()
 plt.plot(history.history['predicted_mh_loss'])
 plt.plot(history.history['val_predicted_mh_loss'])
 plt.title('Model Loss')
@@ -146,8 +151,9 @@ plt.ylabel('Model Loss')
 plt.xlabel('Epoch')
 plt.legend(['[M/H] (Train)', '[M/H] (Test)'], loc='upper left')
 plt.savefig('mh')
+plt.close(figure_mh)
 
-
+figure_logg = plt.figure()
 plt.plot(history.history['predicted_logg_loss'])
 plt.plot(history.history['val_predicted_logg_loss'])
 plt.title('Model Loss')
@@ -155,8 +161,9 @@ plt.ylabel('Model Loss')
 plt.xlabel('Epoch')
 plt.legend(['log(g) (Train)', 'log(g) (Test)'], loc='upper left')
 plt.savefig('logg')
+plt.close(figure_logg)
 
-
+figure_vsini = plt.figure()
 plt.plot(history.history['predicted_vsini_loss'])
 plt.plot(history.history['val_predicted_vsini_loss'])
 plt.title('Model Loss')
@@ -164,9 +171,10 @@ plt.ylabel('Model Loss')
 plt.xlabel('Epoch')
 plt.legend(['vsini (Train)', 'vsini (Test)'], loc='upper left')
 plt.savefig('vsini')
-
+plt.close(figure_vsini)
 
 # Plot training & validation loss values
+figure_loss = plt.figure()
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
 plt.title('Model loss')
@@ -174,4 +182,4 @@ plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.savefig('loss')
-
+plt.close(figure_loss)
